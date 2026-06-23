@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNNIE - Placement & Training Department</title>
+    <style>
+        /* Modern Design System & Variables */
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(20, 27, 45, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: #38bdf8;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.05) 0px, transparent 50%);
+        }
+
+        /* Hero / Header Section */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--accent-glow);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 60px 20px;
+        }
+
+        /* Course Selector Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        .course-card.active {
+            border-color: var(--accent-glow);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .course-card.active::before {
+            background: var(--accent-gradient);
+        }
+
+        .course-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .course-card h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* Dynamic Syllabus Container */
+        .syllabus-display {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            min-height: 200px;
+            transition: all 0.4s ease;
+        }
+
+        .syllabus-header {
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .syllabus-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Unit Breakdown Grid */
+        .unit-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .unit-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .unit-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-glow);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .unit-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .unit-topics li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .unit-topics li::before {
+            content: "✦";
+            color: rgba(56, 189, 248, 0.5);
+            font-size: 0.8rem;
+        }
+
+        /* Placeholder state */
+        .placeholder-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            padding: 40px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .syllabus-display { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>JNN Institute of Engineering</h1>
+        <p>Placement & Training Department</p>
+    </header>
+
+    <div class="container">
+        <div class="course-grid">
+            <div class="course-card" onclick="showSyllabus('webdev', this)">
+                <span class="icon">🌐</span>
+                <h3>Web Development</h3>
+            </div>
+            <div class="course-card" onclick="showSyllabus('c', this)">
+                <span class="icon">💻</span>
+                <h3>C Programming</h3>
+            </div>
+            <div class="course-card" onclick="showSyllabus('cpp', this)">
+                <span class="icon">🚀</span>
+                <h3>C++ Programming</h3>
+            </div>
+            <div class="course-card" onclick="showSyllabus('java', this)">
+                <span class="icon">☕</span>
+                <h3>Java Programming</h3>
+            </div>
+        </div>
+
+        <div class="syllabus-display" id="syllabusDisplay">
+            <div class="placeholder-text">
+                Select a training module above to review the curriculum.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Structural Database Matrix for Curriculums
+        const syllabusData = {
+            webdev: {
+                title: "Web Development Career Roadmap",
+                units: [
+                    {
+                        title: "UNIT I: HTML (HyperText Markup Language)",
+                        topics: ["Introduction to Web Development", "HTML Document Structure", "Headings, Paragraphs, and Text Formatting", "Hyperlinks and Anchors", "Images and Image Mapping", "Lists (Ordered, Unordered, Description)", "Tables and Table Formatting", "HTML Forms and Input Elements", "HTML5 Input Types and Attributes", "Semantic HTML Elements", "Audio and Video Elements", "iFrame and Meta Tags", "Creating Multi-Page Static Websites"]
+                    },
+                    {
+                        title: "UNIT II: CSS (Cascading Style Sheets)",
+                        topics: ["Introduction to CSS", "Types of CSS (Inline, Internal, External)", "CSS Selectors and Properties", "Colors, Fonts, and Backgrounds", "Box Model (Margin, Border, Padding, Content)", "Borders, Shadows, and Gradients", "Display and Positioning", "Navigation Bar Design", "Flexbox Layout", "Grid Layout", "Responsive Web Design (Media Queries)", "Transitions and Animations", "Website Theming and Styling"]
+                    },
+                    {
+                        title: "UNIT III: JavaScript",
+                        topics: ["Introduction to JavaScript", "Variables, Data Types, and Operators", "Conditional Statements", "Looping Statements", "Functions and Scope", "Events and Event Handling", "Form Validation using JavaScript", "DOM Manipulation", "Date and Time Functions", "Arrays and Objects", "Interactive Components (Calculator, Clock, Slider)", "Basic Client-Side Error Handling"]
+                    },
+                    {
+                        title: "UNIT IV: Mini Project (HTML, CSS & JavaScript)",
+                        topics: ["Problem Identification and Requirement Analysis", "Planning Website Structure and Navigation", "Page Design using HTML", "Styling using CSS", "Adding Interactivity using JavaScript", "Form Handling and Validation", "Responsive Design Implementation", "Testing and Debugging", "Mini Project Documentation", "Project Demonstration"]
+                    },
+                    {
+                        title: "UNIT V: Major Project (HTML, CSS & JavaScript)",
+                        topics: ["Project Proposal and Planning", "UI/UX Design and Wireframing", "Development of Multi-Page Website", "Advanced Styling and Layout Techniques", "JavaScript-Based Interactivity", "Form Validation and User Interaction", "Error Handling and Optimization", "Creation of at least 60 Web Pages", "Project Documentation", "Final Project Presentation"]
+                    }
+                ]
+            },
+            c: {
+                title: "C Programming Language Blueprint",
+                units: [
+                    {
+                        title: "MODULE 1: Fundamentals of C",
+                        topics: ["History and Features of C", "Compilation and Execution Process", "Data Types and Variables", "Format Specifiers & Escape Sequences"]
+                    },
+                    {
+                        title: "MODULE 2: Control & Loop Structures",
+                        topics: ["If-Else Decision Modules", "Switch Case Logic Structures", "While, Do-While, and For Loops", "Break and Continue Commands"]
+                    },
+                    {
+                        title: "MODULE 3: Arrays & String Mechanics",
+                        topics: ["1D and Multi-Dimensional Arrays", "String Operations & Standard Library", "Character Array Manipulation", "Sorting Algorithms Implementation"]
+                    },
+                    {
+                        title: "MODULE 4: Functions & Memory Pointers",
+                        topics: ["Function Prototypes and Parameters", "Call by Value vs Call by Reference", "Pointer Storage & Memory Mapping", "Dynamic Memory Allocation (malloc, calloc)"]
+                    },
+                    {
+                        title: "MODULE 5: File Systems & Structures",
+                        topics: ["Structures and Unions Data Layouts", "File Handling (Read, Write, Append)", "Error Handling Patterns", "Terminal-Based Project Compilation"]
+                    }
+                ]
+            },
+            cpp: {
+                title: "C++ Programming Curriculum (30 Hours)",
+                units: [
+                    {
+                        title: "Module 1: Introduction to C++",
+                        topics: ["Overview of object-oriented programming", "History and features of C++", "Differences between C and C++", "Structure of a C++ program", "Compilation and execution of C++ programs"]
+                    },
+                    {
+                        title: "Module 2: Basic Concepts in C++",
+                        topics: ["Data types and variables", "Input and output using cin and cout", "Operators and expressions in C++", "Control statements (if, switch, loops)"]
+                    },
+                    {
+                        title: "Module 3: Functions",
+                        topics: ["Function declaration and definition", "Parameter passing techniques", "Function overloading"]
+                    },
+                    {
+                        title: "Module 4: Classes and Objects",
+                        topics: ["Concept of classes and objects", "Defining classes and creating objects", "Member variables and member functions"]
+                    },
+                    {
+                        title: "Module 5: Constructors and Destructors",
+                        topics: ["Types of constructors", "Constructor overloading", "Destructors and their purpose"]
+                    },
+                    {
+                        title: "Module 6: Object-Oriented Concepts",
+                        topics: ["Encapsulation", "Inheritance and types of inheritance", "Polymorphism", "Operator overloading"]
+                    },
+                    {
+                        title: "Module 7: Advanced Features",
+                        topics: ["File handling in C++", "Exception handling (try, catch, throw)"]
+                    }
+                ]
+            },
+            java: {
+                title: "JAVA PROGRAMMING Curriculum (40 Hours)",
+                units: [
+                    {
+                        title: "Introduction & Setup",
+                        topics: ["Java Introduction", "Java Versions", "Features of Java", "Java Installation and Set Path"]
+                    },
+                    {
+                        title: "Java Basics & Structures",
+                        topics: ["Variables and Operators", "Data Types", "Identifiers", "Conditional Statements (If Else, If Else If, Nested If, Switch Case)", "Looping Statements (For Loop, While Loop, Do While Loop)"]
+                    },
+                    {
+                        title: "Arrays & Core OOPs Concepts",
+                        topics: ["Single Dimensional Array", "Two Dimensional Array", "OOPs Concepts Introduction", "Modifiers", "Classes and Object", "Instance Creation"]
+                    },
+                    {
+                        title: "Polymorphism & Inheritance",
+                        topics: ["Function Overloading", "Constructors", "Function Overriding", "Static Variable and Functions", "Types of Inheritance", "Single Inheritance", "Multilevel Inheritance"]
+                    },
+                    {
+                        title: "Interfaces, Abstract Classes & Packages",
+                        topics: ["Abstract Class Introduction", "Interfaces Introduction", "Create Package", "Import Package"]
+                    },
+                    {
+                        title: "Exception Handling & Threading",
+                        topics: ["Exception Handling Introduction", "Built-in Exceptions", "User-Defined Exceptions", "Threading Introduction", "Thread Creating using Thread Class", "Using Runnable Interface", "Sleep Method", "Join and Wait", "Thread Synchronization"]
+                    },
+                    {
+                        title: "Collections & GUI Frameworks",
+                        topics: ["Collection Classes and Interface", "List Classes and Interfaces", "Set Classes and Interfaces", "Applet Life Cycle", "Applet with Graphics Class", "AWT Controls", "Event Handling", "Swing Controls", "Features of Swing Controls"]
+                    }
+                ]
+            }
+        };
+
+        // Render Controller Implementation
+        function showSyllabus(courseKey, cardElement) {
+            // Manage Active Card States visually
+            document.querySelectorAll('.course-card').forEach(card => card.classList.remove('active'));
+            cardElement.classList.add('active');
+
+            const course = syllabusData[courseKey];
+            const display = document.getElementById('syllabusDisplay');
+
+            // Generate HTML markup dynamically
+            let htmlContent = `
+                <div class="syllabus-header">
+                    <h2>${course.title}</h2>
+                </div>
+                <div class="unit-grid">
+            `;
+
+            course.units.forEach(unit => {
+                htmlContent += `
+                    <div class="unit-card">
+                        <div class="unit-title">${unit.title}</div>
+                        <ul class="unit-topics">
+                            ${unit.topics.map(topic => `<li>${topic}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+
+            htmlContent += `</div>`;
+            display.innerHTML = htmlContent;
+        }
+    </script>
+</body>
+</html>
