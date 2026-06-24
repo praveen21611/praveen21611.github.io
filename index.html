@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISI MSQE Preparation Hub</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --math-color: #059669;
+            --stats-color: #7c3aed;
+            --micro-color: #ea580c;
+            --macro-color: #db2777;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.2rem;
+            color: #93c5fd;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            margin-right: 1rem;
+            color: white;
+        }
+
+        .math-badge { background-color: var(--math-color); }
+        .stats-badge { background-color: var(--stats-color); }
+        .micro-badge { background-color: var(--micro-color); }
+        .macro-badge { background-color: var(--macro-color); }
+
+        .topic-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-group h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .syllabus-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .syllabus-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #334155;
+        }
+
+        .syllabus-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ISI Preparation Hub</h1>
+        <p>Syllabus for MSQE Admission Test 2026</p>
+    </header>
+
+    <div class="container">
+        <div class="grid">
+            
+            <!-- Mathematics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge math-badge">PEA</span>
+                    <h3 class="card-title">Syllabus for Mathematics</h3>
+                </div>
+                
+                <div class="topic-group">
+                    <h4>Algebra</h4>
+                    <ul class="syllabus-list">
+                        <li>Binomial Theorem</li>
+                        <li>Arithmetic Progression (AP) & Geometric Progression (GP)</li>
+                        <li>Series</li>
+                        <li>Permutations and combinations</li>
+                        <li>Theory of polynomial equations</li>
+                    </ul>
+                </div>
+
+                <div class="topic-group">
+                    <h4>Linear Algebra</h4>
+                    <ul class="syllabus-list">
+                        <li>Vector spaces & Linear transformations</li>
+                        <li>Matrix representations and elementary operations</li>
+                        <li>Systems of linear equations</li>
+                        <li>Eigenvalues</li>
+                    </ul>
+                </div>
+
+                <div class="topic-group">
+                    <h4>Calculus</h4>
+                    <ul class="syllabus-list">
+                        <li>Functions & Inverses of functions</li>
+                        <li>Limits & Continuity</li>
+                        <li>Differentiation of functions of one or more variables</li>
+                        <li>Unconstrained Optimization</li>
+                        <li>Definite and Indefinite Integrals</li>
+                        <li>Integration by parts and integration by substitution</li>
+                        <li>Monotonicity, convexity and quasi-convexity of functions</li>
+                        <li>Constrained optimization of functions of not more than two variables</li>
+                        <li>Implicit function theorem</li>
+                        <li>Homogeneous and homothetic functions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Statistics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge stats-badge">PEA</span>
+                    <h3 class="card-title">Syllabus for Statistics</h3>
+                </div>
+                <div class="topic-group">
+                    <h4>Probability & Core Stats</h4>
+                    <ul class="syllabus-list">
+                        <li>Elementary probability theory & Conditional probability</li>
+                        <li>Bayes’ Theorem</li>
+                        <li>Measures of central tendency & Dispersion</li>
+                        <li>Correlation and regression</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Probability Distributions</h4>
+                    <ul class="syllabus-list">
+                        <li>Discrete and continuous probability distributions</li>
+                        <li>Standard distributions: Binomial & Geometric</li>
+                        <li>Standard distributions: Normal, Poisson & Chi-square</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Inference</h4>
+                    <ul class="syllabus-list">
+                        <li>Sampling & Estimation</li>
+                        <li>Hypothesis testing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Microeconomics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge micro-badge">PEB</span>
+                    <h3 class="card-title">Syllabus for Microeconomics</h3>
+                </div>
+                <div class="topic-group">
+                    <h4>Consumer & Producer Theory</h4>
+                    <ul class="syllabus-list">
+                        <li>Theory of choice</li>
+                        <li>Consumer behaviour and production</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Markets & Strategic Interaction</h4>
+                    <ul class="syllabus-list">
+                        <li>Competitive markets & Market structure under perfect competition</li>
+                        <li>Monopoly & Price discrimination</li>
+                        <li>Duopoly with Cournot and Bertrand competition</li>
+                        <li>Elementary strategic interaction</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Welfare & Equilibria</h4>
+                    <ul class="syllabus-list">
+                        <li>Public goods & Externalities</li>
+                        <li>General equilibrium</li>
+                        <li>Welfare economics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Macroeconomics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge macro-badge">PEB</span>
+                    <h3 class="card-title">Syllabus for Macroeconomics</h3>
+                </div>
+                <div class="topic-group">
+                    <h4>Core Income & Market Models</h4>
+                    <ul class="syllabus-list">
+                        <li>National income accounting</li>
+                        <li>Simple Keynesian Model of income determination and the multiplier</li>
+                        <li>IS-LM Model</li>
+                        <li>Models of aggregate demand and aggregate supply</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Monetary & Open Economy</h4>
+                    <ul class="syllabus-list">
+                        <li>Money, banking and inflation</li>
+                        <li>Phillips curve</li>
+                        <li>Elementary open economy macroeconomics</li>
+                    </ul>
+                </div>
+                <div class="topic-group">
+                    <h4>Growth Models</h4>
+                    <ul class="syllabus-list">
+                        <li>The Harrod-Domar Model</li>
+                        <li>The Solow Model</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Indian Statistical Institute (ISI) — Master of Science in Quantitative Economics (MSQE) 2026 Portal</p>
+    </footer>
+
+</body>
+</html>
