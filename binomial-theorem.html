@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-Storing Workspace</title>
+    <title>Git-Sync Workspace</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -13,10 +13,11 @@
             --primary: #3b82f6;
             --border-radius: 16px;
             --success: #10b981;
+            --danger: #ef4444;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.7;
@@ -27,48 +28,51 @@
         header {
             background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 100%);
             text-align: center;
-            padding: 3.5rem 2rem 2rem 2rem;
+            padding: 3rem 2rem 1.5rem 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 800;
             background: linear-gradient(to right, #ffffff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-bar { max-width: 800px; margin: 1.5rem auto; padding: 0 1.5rem; }
+        .nav-bar { max-width: 800px; margin: 1.5rem auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center;}
         
-        .back-btn {
+        .btn-ui {
             display: inline-flex;
             align-items: center;
-            padding: 0.6rem 1.2rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             font-weight: 600;
             text-decoration: none;
             color: var(--text-main);
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            cursor: pointer;
         }
 
         .container { max-width: 800px; margin: 0 auto 5rem auto; padding: 0 1.5rem; }
 
-        .workspace-panel {
+        .panel {
             background: rgba(30, 41, 59, 0.5);
             border-radius: var(--border-radius);
-            padding: 2rem;
+            padding: 1.5rem;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
+
+        .hidden { display: none !important; }
 
         .form-group { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
         .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
         
-        .form-group textarea {
+        .form-group textarea, .form-group input {
             background: #0f172a;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
@@ -79,7 +83,7 @@
         }
 
         .btn-save {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
@@ -90,88 +94,172 @@
             width: 100%;
         }
 
+        #status-msg {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .status-success { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .status-loading { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.2); }
+        .status-error { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); }
+
         .display-canvas {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 2.5rem;
+            padding: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .display-canvas h2 { margin: 0 0 1.5rem 0; font-size: 1.6rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; }
-        
+        .display-canvas h2 { margin: 0 0 1.5rem 0; font-size: 1.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; }
         #static-notes { font-size: 1.05rem; color: #cbd5e1; white-space: pre-line; margin-bottom: 2rem; }
         #static-formulas { background: #090d16; border-radius: 8px; padding: 1.25rem; font-family: monospace; color: #38bdf8; border-left: 4px solid var(--primary); white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
+    <!-- REPO DETAILS (Change these to match yours) -->
+    <div id="git-config" data-owner="praveen21611" data-repo="praveen21611.github.io" data-path="binomial-theorem.html"></div>
+
     <header>
         <h1 id="page-title">Binomial Theorem</h1>
-        <p>Self-Contained Study Vault</p>
+        <p>Live Git-Syncing Workspace</p>
     </header>
 
     <div class="nav-bar">
-        <a href="index.html" class="back-btn">← Home Dashboard</a>
+        <a href="index.html" class="btn-ui">← Dashboard</a>
+        <button class="btn-ui" onclick="toggleSettings()">⚙️ Connection Setup</button>
     </div>
 
     <div class="container">
-        <div class="workspace-panel">
+        <!-- Settings Panel (Hidden until clicked) -->
+        <div id="settings-panel" class="panel hidden">
+            <h3>🔑 GitHub Token Configuration</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Tokens are saved safely in your private browser storage. They are never published to GitHub.</p>
             <div class="form-group">
-                <label>My Core Understanding & Explanations</label>
-                <textarea id="edit-notes" rows="6" placeholder="Type notes here..."></textarea>
+                <label>Fine-Grained Personal Access Token</label>
+                <input type="password" id="gh-token" placeholder="github_pat_...">
             </div>
-            <div class="form-group">
-                <label>Key Formulas / Equations Block</label>
-                <textarea id="edit-formulas" rows="3" placeholder="Type formulas here..."></textarea>
-            </div>
-            <button type="button" class="btn-save" onclick="bakeAndDownloadHTML()">💾 Save & Update HTML File</button>
+            <button class="btn-ui" style="background: var(--success); width: 100%;" onclick="saveSettings()">Save Configuration</button>
         </div>
 
+        <!-- Editor View -->
+        <div class="panel">
+            <div class="form-group">
+                <label>Core Understandings</label>
+                <textarea id="edit-notes" rows="5" placeholder="Type core concepts..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Formulas / Equations</label>
+                <textarea id="edit-formulas" rows="2" placeholder="Type math notations..."></textarea>
+            </div>
+            <button type="button" class="btn-save" onclick="syncWithGitHub()">🚀 Save & Commit directly to GitHub</button>
+            <div id="status-msg" class="hidden"></div>
+        </div>
+
+        <!-- Rendered View -->
         <div class="display-canvas">
-            <h2>Saved Reference</h2>
-            <div id="static-notes">Initial setup complete. Type your notes above to overwrite this text permanently!</div>
+            <h2>Saved Document View</h2>
+            <!-- DATA EMBED ZONE -->
+            <div id="static-notes">Initial setup complete. Run connection setup, update notes, and click push!</div>
             <div id="static-formulas">No formulas saved yet.</div>
         </div>
     </div>
 
     <script>
-        // On boot, read what is written in the static HTML segments and put it in the editor
+        // Init editor fields on boot up
         document.getElementById('edit-notes').value = document.getElementById('static-notes').innerText;
         document.getElementById('edit-formulas').value = document.getElementById('static-formulas').innerText;
+        if(localStorage.getItem('gh_pat_token')) {
+            document.getElementById('gh-token').value = localStorage.getItem('gh_pat_token');
+        }
 
-        function bakeAndDownloadHTML() {
+        function toggleSettings() { document.getElementById('settings-panel').classList.toggle('hidden'); }
+        
+        function saveSettings() {
+            const token = document.getElementById('gh-token').value.trim();
+            if(token) {
+                localStorage.setItem('gh_pat_token', token);
+                alert('Token verified and saved locally!');
+                toggleSettings();
+            }
+        }
+
+        function showStatus(text, type) {
+            const el = document.getElementById('status-msg');
+            el.className = `status-${type}`;
+            el.innerText = text;
+        }
+
+        async function syncWithGitHub() {
+            const token = localStorage.getItem('gh_pat_token');
+            if(!token) {
+                showStatus("❌ Missing credentials. Click 'Connection Setup' to link your account.", "error");
+                document.getElementById('settings-panel').classList.remove('hidden');
+                return;
+            }
+
+            showStatus("⏳ Connecting to GitHub API...", "loading");
+
             const freshNotes = document.getElementById('edit-notes').value;
             const freshFormulas = document.getElementById('edit-formulas').value;
-
-            // Update the live viewing panel text elements immediately
+            
+            // Render locally instantly
             document.getElementById('static-notes').innerText = freshNotes;
             document.getElementById('static-formulas').innerText = freshFormulas;
 
-            // Grab the entire updated text string of this exact open webpage file
-            let entirePageCode = document.documentElement.outerHTML;
-            
-            // Clean up the input textarea element values so they default to your new text on next load
-            entirePageCode = entirePageCode.replace(
-                /<textarea id="edit-notes"([^>]*)>([\s\S]*?)<\/textarea>/,
-                `<textarea id="edit-notes"$1>${escapeHTML(freshNotes)}</textarea>`
-            );
-            entirePageCode = entirePageCode.replace(
-                /<textarea id="edit-formulas"([^>]*)>([\s\S]*?)<\/textarea>/,
-                `<textarea id="edit-formulas"$1>${escapeHTML(freshFormulas)}</textarea>`
-            );
+            // Target Info
+            const config = document.getElementById('git-config').dataset;
+            const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
 
-            // Reassemble the full file package
-            const fullBlobContent = "<!DOCTYPE html>\n<html lang=\"en\">\n" + entirePageCode + "\n</html>";
-            
-            const blob = new Blob([fullBlobContent], { type: "text/html" });
-            const downloaderLink = document.createElement("a");
-            
-            // Deduce the clean matching filename based on the title header
-            const fileName = document.getElementById('page-title').innerText.replace(/\s+/g, '-').toLowerCase() + ".html";
-            
-            downloaderLink.href = URL.createObjectURL(blob);
-            downloaderLink.download = fileName;
-            downloaderLink.click();
+            try {
+                // Step 1: Query GitHub to get the target file's current unique SHA code
+                const getRes = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+                });
+
+                if(!getRes.ok) throw new Error("Could not fetch file version data from GitHub.");
+                const fileData = await getRes.json();
+                const currentSha = fileData.sha;
+
+                // Step 2: Build the complete fresh modified code layout block
+                let entirePageCode = document.documentElement.outerHTML;
+                entirePageCode = entirePageCode.replace(/<textarea id="edit-notes"([^>]*)>([\s\S]*?)<\/textarea>/, `<textarea id="edit-notes"$1>${escapeHTML(freshNotes)}</textarea>`);
+                entirePageCode = entirePageCode.replace(/<textarea id="edit-formulas"([^>]*)>([\s\S]*?)<\/textarea>/, `<textarea id="edit-formulas"$1>${escapeHTML(freshFormulas)}</textarea>`);
+                
+                const rawFullHTML = "<!DOCTYPE html>\n<html lang=\"en\">\n" + entirePageCode + "\n</html>";
+                
+                // Step 3: Encode the source payload into Base64 format as required by GitHub
+                const base64Content = btoa(unescape(encodeURIComponent(rawFullHTML)));
+
+                // Step 4: Dispatch PUT payload directly up into the master repository tree
+                showStatus("🛰️ Uploading updates and registering Git commit...", "loading");
+                const putRes = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/vnd.github+json'
+                    },
+                    body: JSON.stringify({
+                        message: `Study update: ${document.getElementById('page-title').innerText}`,
+                        content: base64Content,
+                        sha: currentSha
+                    })
+                });
+
+                if(putRes.ok) {
+                    showStatus("✅ Successfully pushed to GitHub! Pages rebuild will follow shortly.", "success");
+                } else {
+                    const errDetail = await putRes.json();
+                    throw new Error(errDetail.message || "Failed API deployment transaction.");
+                }
+
+            } catch (err) {
+                showStatus(`❌ Synchronization failed: ${err.message}`, "error");
+            }
         }
 
         function escapeHTML(str) {
