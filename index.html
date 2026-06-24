@@ -161,14 +161,122 @@
             font-size: 0.9rem;
             border-top: 1px solid #e2e8f0;
             margin-top: 4rem;
+
+            /* Dashboard Layout */
+        .dashboard-bar {
+            max-width: 1000px;
+            margin: 2rem auto 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 1.25rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Action Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .dash-btn {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            color: white;
+        }
+
+        .btn-achieve { background-color: #0284c7; }
+        .btn-achieve:hover { background-color: #0369a1; transform: translateY(-1px); }
+
+        .btn-pyq { background-color: #4f46e5; }
+        .btn-pyq:hover { background-color: #4338ca; transform: translateY(-1px); }
+
+        /* Stats Blocks */
+        .stats-tracker {
+            display: flex;
+            gap: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0 0.75rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-bar { flex-direction: column; }
+            .nav-buttons { width: 100%; flex-direction: column; }
+            .stats-tracker { width: 100%; justify-content: space-around; }
+        }
         }
     </style>
 </head>
 <body>
 
-    <header>
+   <header>
         <h1>ISI Preparation Hub</h1>
         <p>Syllabus for MSQE Admission Test 2026</p>
+
+        <div class="dashboard-bar">
+            <div class="nav-buttons">
+                <a href="https://github.com/praveen21611/isi-prep/wiki/Daily-Achievements" target="_blank" class="dash-btn btn-achieve">
+                    🏆 Daily Achievements
+                </a>
+                <a href="https://github.com/praveen21611/isi-prep/wiki/PYQs" target="_blank" class="dash-btn btn-pyq">
+                    📝 Past Year Questions (PYQs)
+                </a>
+            </div>
+
+            <div class="stats-tracker">
+                <div class="stat-item">
+                    <span class="stat-num math-color">0</span>
+                    <span class="stat-label">Math Qns</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num stats-color">0</span>
+                    <span class="stat-label">Stats Qns</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num micro-color">0</span>
+                    <span class="stat-label">Micro Qns</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num macro-color">0</span>
+                    <span class="stat-label">Macro Qns</span>
+                </div>
+            </div>
+        </div>
     </header>
 
     <div class="container">
