@@ -133,7 +133,6 @@
             position: relative;
             padding-left: 1.5rem;
             margin-bottom: 0.5rem;
-            color: #334155;
         }
 
         .syllabus-list li::before {
@@ -142,6 +141,17 @@
             left: 0;
             color: var(--text-muted);
             font-weight: bold;
+        }
+
+        .syllabus-list a {
+            color: #334155;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .syllabus-list a:hover {
+            color: var(--primary);
+            text-decoration: underline;
         }
 
         footer {
@@ -158,13 +168,12 @@
 
     <header>
         <h1>ISI Preparation Hub</h1>
-        <p>Syllabus for MSQE Admission Test 2027</p>
+        <p>Syllabus for MSQE Admission Test 2026</p>
     </header>
 
     <div class="container">
         <div class="grid">
             
-            <!-- Mathematics Card -->
             <div class="card">
                 <div class="card-header">
                     <span class="badge math-badge">PEA</span>
@@ -174,42 +183,41 @@
                 <div class="topic-group">
                     <h4>Algebra</h4>
                     <ul class="syllabus-list">
-                        <li>Binomial Theorem</li>
-                        <li>Arithmetic Progression (AP) & Geometric Progression (GP)</li>
-                        <li>Series</li>
-                        <li>Permutations and combinations</li>
-                        <li>Theory of polynomial equations</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Binomial-Theorem" target="_blank">Binomial Theorem</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/AP-and-GP" target="_blank">Arithmetic Progression (AP) & Geometric Progression (GP)</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Series" target="_blank">Series</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Permutations-and-Combinations" target="_blank">Permutations and combinations</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Theory-of-Polynomial-Equations" target="_blank">Theory of polynomial equations</a></li>
                     </ul>
                 </div>
 
                 <div class="topic-group">
                     <h4>Linear Algebra</h4>
                     <ul class="syllabus-list">
-                        <li>Vector spaces & Linear transformations</li>
-                        <li>Matrix representations and elementary operations</li>
-                        <li>Systems of linear equations</li>
-                        <li>Eigenvalues</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Vector-Spaces" target="_blank">Vector spaces & Linear transformations</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Matrix-Representations" target="_blank">Matrix representations and elementary operations</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Systems-of-Linear-Equations" target="_blank">Systems of linear equations</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Eigenvalues" target="_blank">Eigenvalues</a></li>
                     </ul>
                 </div>
 
                 <div class="topic-group">
                     <h4>Calculus</h4>
                     <ul class="syllabus-list">
-                        <li>Functions & Inverses of functions</li>
-                        <li>Limits & Continuity</li>
-                        <li>Differentiation of functions of one or more variables</li>
-                        <li>Unconstrained Optimization</li>
-                        <li>Definite and Indefinite Integrals</li>
-                        <li>Integration by parts and integration by substitution</li>
-                        <li>Monotonicity, convexity and quasi-convexity of functions</li>
-                        <li>Constrained optimization of functions of not more than two variables</li>
-                        <li>Implicit function theorem</li>
-                        <li>Homogeneous and homothetic functions</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Functions" target="_blank">Functions & Inverses of functions</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Limits-and-Continuity" target="_blank">Limits & Continuity</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Differentiation" target="_blank">Differentiation of functions of one or more variables</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Unconstrained-Optimization" target="_blank">Unconstrained Optimization</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Integrals" target="_blank">Definite and Indefinite Integrals</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Integration-Techniques" target="_blank">Integration by parts and integration by substitution</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Monotonicity-and-Convexity" target="_blank">Monotonicity, convexity and quasi-convexity of functions</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Constrained-Optimization" target="_blank">Constrained optimization of functions of not more than two variables</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Implicit-Function-Theorem" target="_blank">Implicit function theorem</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Homogeneous-and-Homothetic-Functions" target="_blank">Homogeneous and homothetic functions</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Statistics Card -->
             <div class="card">
                 <div class="card-header">
                     <span class="badge stats-badge">PEA</span>
@@ -218,30 +226,29 @@
                 <div class="topic-group">
                     <h4>Probability & Core Stats</h4>
                     <ul class="syllabus-list">
-                        <li>Elementary probability theory & Conditional probability</li>
-                        <li>Bayes’ Theorem</li>
-                        <li>Measures of central tendency & Dispersion</li>
-                        <li>Correlation and regression</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Elementary-Probability-Theory" target="_blank">Elementary probability theory & Conditional probability</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Bayes-Theorem" target="_blank">Bayes’ Theorem</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Central-Tendency-and-Dispersion" target="_blank">Measures of central tendency & Dispersion</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Correlation-and-Regression" target="_blank">Correlation and regression</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Probability Distributions</h4>
                     <ul class="syllabus-list">
-                        <li>Discrete and continuous probability distributions</li>
-                        <li>Standard distributions: Binomial & Geometric</li>
-                        <li>Standard distributions: Normal, Poisson & Chi-square</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Probability-Distributions" target="_blank">Discrete and continuous probability distributions</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Binomial-and-Geometric-Distributions" target="_blank">Standard distributions: Binomial & Geometric</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Normal-Poisson-and-Chisquare-Distributions" target="_blank">Standard distributions: Normal, Poisson & Chi-square</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Inference</h4>
                     <ul class="syllabus-list">
-                        <li>Sampling & Estimation</li>
-                        <li>Hypothesis testing</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Sampling-and-Estimation" target="_blank">Sampling & Estimation</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Hypothesis-Testing" target="_blank">Hypothesis testing</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Microeconomics Card -->
             <div class="card">
                 <div class="card-header">
                     <span class="badge micro-badge">PEB</span>
@@ -250,30 +257,29 @@
                 <div class="topic-group">
                     <h4>Consumer & Producer Theory</h4>
                     <ul class="syllabus-list">
-                        <li>Theory of choice</li>
-                        <li>Consumer behaviour and production</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Theory-of-Choice" target="_blank">Theory of choice</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Consumer-Behaviour-and-Production" target="_blank">Consumer behaviour and production</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Markets & Strategic Interaction</h4>
                     <ul class="syllabus-list">
-                        <li>Competitive markets & Market structure under perfect competition</li>
-                        <li>Monopoly & Price discrimination</li>
-                        <li>Duopoly with Cournot and Bertrand competition</li>
-                        <li>Elementary strategic interaction</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Competitive-Markets" target="_blank">Competitive markets & Market structure under perfect competition</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Monopoly-and-Price-Discrimination" target="_blank">Monopoly & Price discrimination</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Duopoly-Models" target="_blank">Duopoly with Cournot and Bertrand competition</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Elementary-Strategic-Interaction" target="_blank">Elementary strategic interaction</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Welfare & Equilibria</h4>
                     <ul class="syllabus-list">
-                        <li>Public goods & Externalities</li>
-                        <li>General equilibrium</li>
-                        <li>Welfare economics</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Public-Goods-and-Externalities" target="_blank">Public goods & Externalities</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/General-Equilibrium" target="_blank">General equilibrium</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Welfare-Economics" target="_blank">Welfare economics</a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Macroeconomics Card -->
             <div class="card">
                 <div class="card-header">
                     <span class="badge macro-badge">PEB</span>
@@ -282,25 +288,25 @@
                 <div class="topic-group">
                     <h4>Core Income & Market Models</h4>
                     <ul class="syllabus-list">
-                        <li>National income accounting</li>
-                        <li>Simple Keynesian Model of income determination and the multiplier</li>
-                        <li>IS-LM Model</li>
-                        <li>Models of aggregate demand and aggregate supply</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/National-Income-Accounting" target="_blank">National income accounting</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Simple-Keynesian-Model" target="_blank">Simple Keynesian Model of income determination and the multiplier</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/ISLM-Model" target="_blank">IS-LM Model</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Aggregate-Demand-and-Supply" target="_blank">Models of aggregate demand and aggregate supply</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Monetary & Open Economy</h4>
                     <ul class="syllabus-list">
-                        <li>Money, banking and inflation</li>
-                        <li>Phillips curve</li>
-                        <li>Elementary open economy macroeconomics</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Money-Banking-and-Inflation" target="_blank">Money, banking and inflation</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Phillips-Curve" target="_blank">Phillips curve</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Open-Economy-Macroeconomics" target="_blank">Elementary open economy macroeconomics</a></li>
                     </ul>
                 </div>
                 <div class="topic-group">
                     <h4>Growth Models</h4>
                     <ul class="syllabus-list">
-                        <li>The Harrod-Domar Model</li>
-                        <li>The Solow Model</li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Harrod-Domar-Model" target="_blank">The Harrod-Domar Model</a></li>
+                        <li><a href="https://github.com/praveen21611/isi-prep/wiki/Solow-Model" target="_blank">The Solow Model</a></li>
                     </ul>
                 </div>
             </div>
@@ -309,7 +315,7 @@
     </div>
 
     <footer>
-        <p>Indian Statistical Institute (ISI) — Master of Science in Quantitative Economics (MSQE) 2027 Portal</p>
+        <p>Indian Statistical Institute (ISI) — Master of Science in Quantitative Economics (MSQE) 2026 Portal</p>
     </footer>
 
 </body>
