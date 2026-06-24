@@ -6,17 +6,26 @@
     <title>ISI MSQE Preparation Hub</title>
     <style>
         :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --primary: #2563eb;
-            --primary-light: #eff6ff;
-            --math-color: #059669;
-            --stats-color: #7c3aed;
-            --micro-color: #ea580c;
-            --macro-color: #db2777;
-            --border-radius: 12px;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            
+            --math-color: #10b981;
+            --math-glow: rgba(16, 185, 129, 0.15);
+            
+            --stats-color: #8b5cf6;
+            --stats-glow: rgba(139, 92, 246, 0.15);
+            
+            --micro-color: #f97316;
+            --micro-glow: rgba(249, 115, 22, 0.15);
+            
+            --macro-color: #ec4899;
+            --macro-glow: rgba(236, 72, 153, 0.15);
+            
+            --border-radius: 16px;
         }
 
         body {
@@ -26,101 +35,192 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
-            color: white;
+            background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 100%);
             text-align: center;
-            padding: 4rem 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 4.5rem 2rem 3.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 800;
             letter-spacing: -0.05em;
+            background: linear-gradient(to right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
-            margin: 0.5rem 0 0 0;
+            margin: 0.75rem 0 0 0;
             font-size: 1.2rem;
-            color: #93c5fd;
+            color: #60a5fa;
             font-weight: 500;
+            letter-spacing: 0.02em;
         }
 
+        /* Modern Dashboard Bar */
+        .dashboard-bar {
+            max-width: 1000px;
+            margin: 2.5rem auto 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(30, 41, 59, 0.7);
+            padding: 1.25rem 1.75rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .dash-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-achieve { background: linear-gradient(135deg, #0284c7, #0369a1); }
+        .btn-achieve:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(2, 132, 199, 0.4); }
+
+        .btn-pyq { background: linear-gradient(135deg, #4f46e5, #4338ca); }
+        .btn-pyq:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
+
+        .stats-tracker {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 0.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.25rem 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            display: block;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 0.15rem;
+        }
+
+        /* Container & Grid Layout */
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 3rem auto;
             padding: 0 1.5rem;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+            gap: 2.5rem;
         }
 
-        @media (max-width: 600px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* Modernized Cards */
         .card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            padding: 2.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.4);
         }
+
+        /* Active Glow Sub-Themes per Card */
+        .card.math-card:hover { border-color: var(--math-color); box-shadow: 0 0 30px var(--math-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .card.stats-card:hover { border-color: var(--stats-color); box-shadow: 0 0 30px var(--stats-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .card.micro-card:hover { border-color: var(--micro-color); box-shadow: 0 0 30px var(--micro-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
+        .card.macro-card:hover { border-color: var(--macro-color); box-shadow: 0 0 30px var(--macro-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
 
         .card-header {
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 1.25rem;
+            margin-bottom: 2rem;
         }
 
         .card-title {
             margin: 0;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
         .badge {
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            margin-right: 1rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            margin-right: 1.25rem;
             color: white;
+            letter-spacing: 0.05em;
         }
 
-        .math-badge { background-color: var(--math-color); }
-        .stats-badge { background-color: var(--stats-color); }
-        .micro-badge { background-color: var(--micro-color); }
-        .macro-badge { background-color: var(--macro-color); }
+        .math-badge { background-color: var(--math-color); box-shadow: 0 0 12px var(--math-glow); }
+        .stats-badge { background-color: var(--stats-color); box-shadow: 0 0 12px var(--stats-glow); }
+        .micro-badge { background-color: var(--micro-color); box-shadow: 0 0 12px var(--micro-glow); }
+        .macro-badge { background-color: var(--macro-color); box-shadow: 0 0 12px var(--macro-glow); }
 
         .topic-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .topic-group:last-child {
+            margin-bottom: 0;
         }
 
         .topic-group h4 {
-            margin: 0 0 0.5rem 0;
+            margin: 0 0 0.85rem 0;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
+            font-weight: 700;
         }
 
         .syllabus-list {
@@ -131,120 +231,69 @@
 
         .syllabus-list li {
             position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
+            padding-left: 1.75rem;
+            margin-bottom: 0.75rem;
         }
 
+        /* Modern sleek arrow bullets */
         .syllabus-list li::before {
-            content: "•";
+            content: "→";
             position: absolute;
             left: 0;
             color: var(--text-muted);
+            transition: color 0.2s ease, transform 0.2s ease;
             font-weight: bold;
         }
 
+        .syllabus-list li:hover::before {
+            transform: translateX(3px);
+        }
+
+        .math-card .syllabus-list li:hover::before { color: var(--math-color); }
+        .stats-card .syllabus-list li:hover::before { color: var(--stats-color); }
+        .micro-card .syllabus-list li:hover::before { color: var(--micro-color); }
+        .macro-card .syllabus-list li:hover::before { color: var(--macro-color); }
+
+        /* Sleek typography link states */
         .syllabus-list a {
-            color: #334155;
+            color: #cbd5e1;
             text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
             transition: color 0.2s ease;
         }
 
         .syllabus-list a:hover {
-            color: var(--primary);
-            text-decoration: underline;
+            color: #ffffff;
         }
 
         footer {
             text-align: center;
-            padding: 3rem 1.5rem;
+            padding: 4rem 1.5rem;
             color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 4rem;
-
-            /* Dashboard Layout */
-        .dashboard-bar {
-            max-width: 1000px;
-            margin: 2rem auto 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            background: rgba(255, 255, 255, 0.06);
-            padding: 1.25rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 6rem;
+            letter-spacing: 0.02em;
         }
 
-        /* Action Buttons */
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .dash-btn {
-            display: inline-block;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            color: white;
-        }
-
-        .btn-achieve { background-color: #0284c7; }
-        .btn-achieve:hover { background-color: #0369a1; transform: translateY(-1px); }
-
-        .btn-pyq { background-color: #4f46e5; }
-        .btn-pyq:hover { background-color: #4338ca; transform: translateY(-1px); }
-
-        /* Stats Blocks */
-        .stats-tracker {
-            display: flex;
-            gap: 1rem;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 0 0.75rem;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            display: block;
-            font-size: 1.2rem;
-            font-weight: 800;
-        }
-
-        .stat-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
+        /* Responsive Fixes */
+        @media (max-width: 1200px) {
+            .grid { grid-template-columns: 1fr; max-width: 700px; margin: 0 auto; }
         }
 
         @media (max-width: 768px) {
-            .dashboard-bar { flex-direction: column; }
+            header h1 { font-size: 2.2rem; }
+            .dashboard-bar { flex-direction: column; padding: 1.5rem; }
             .nav-buttons { width: 100%; flex-direction: column; }
             .stats-tracker { width: 100%; justify-content: space-around; }
-        }
+            .card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-   <header>
+    <header>
         <h1>ISI Preparation Hub</h1>
         <p>Syllabus for MSQE Admission Test 2026</p>
 
@@ -260,19 +309,19 @@
 
             <div class="stats-tracker">
                 <div class="stat-item">
-                    <span class="stat-num math-color">0</span>
+                    <span class="stat-num" style="color: var(--math-color);">0</span>
                     <span class="stat-label">Math Qns</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num stats-color">0</span>
+                    <span class="stat-num" style="color: var(--stats-color);">0</span>
                     <span class="stat-label">Stats Qns</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num micro-color">0</span>
+                    <span class="stat-num" style="color: var(--micro-color);">0</span>
                     <span class="stat-label">Micro Qns</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-num macro-color">0</span>
+                    <span class="stat-num" style="color: var(--macro-color);">0</span>
                     <span class="stat-label">Macro Qns</span>
                 </div>
             </div>
@@ -282,7 +331,7 @@
     <div class="container">
         <div class="grid">
             
-            <div class="card">
+            <div class="card math-card">
                 <div class="card-header">
                     <span class="badge math-badge">PEA</span>
                     <h3 class="card-title">Syllabus for Mathematics</h3>
@@ -326,7 +375,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card stats-card">
                 <div class="card-header">
                     <span class="badge stats-badge">PEA</span>
                     <h3 class="card-title">Syllabus for Statistics</h3>
@@ -357,7 +406,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card micro-card">
                 <div class="card-header">
                     <span class="badge micro-badge">PEB</span>
                     <h3 class="card-title">Syllabus for Microeconomics</h3>
@@ -388,7 +437,7 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card macro-card">
                 <div class="card-header">
                     <span class="badge macro-badge">PEB</span>
                     <h3 class="card-title">Syllabus for Macroeconomics</h3>
