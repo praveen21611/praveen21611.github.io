@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prep Diary & Achievements</title>
+    <title>Interactive Prep Diary</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -14,7 +14,7 @@
             --primary-glow: rgba(59, 130, 246, 0.15);
             --border-radius: 16px;
             --success: #10b981;
-            --accent-purple: #8b5cf6;
+            --danger: #ef4444;
         }
 
         body {
@@ -30,8 +30,7 @@
         header {
             background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 100%);
             text-align: center;
-            padding: 4rem 2rem 2.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 2rem 1.5rem 2rem;
         }
 
         header h1 {
@@ -51,10 +50,9 @@
             font-weight: 500;
         }
 
-        /* Fixed Navigation & Metric Tracker */
         .metrics-bar {
-            max-width: 900px;
-            margin: 2rem auto;
+            max-width: 800px;
+            margin: 1.5rem auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -62,9 +60,7 @@
             padding: 1rem 1.5rem;
             border-radius: var(--border-radius);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
         }
 
         .back-btn {
@@ -81,16 +77,9 @@
             transition: all 0.2s ease;
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-2px);
-        }
+        .back-btn:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(-2px); }
 
-        .counter-cluster {
-            display: flex;
-            gap: 1.5rem;
-        }
-
+        .counter-cluster { display: flex; gap: 1.5rem; }
         .counter-pill {
             font-size: 0.85rem;
             font-weight: 700;
@@ -99,21 +88,86 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .counter-pill span { color: var(--primary); margin-left: 0.25rem; }
 
-        .counter-pill span {
-            color: var(--primary);
-            margin-left: 0.25rem;
+        /* Input Form Panel */
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
         }
 
-        /* Timeline Container */
+        .diary-form {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .form-title {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #93c5fd;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input, .form-group textarea {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            width: 100%;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+
+        /* Timeline Feed Layout */
         .diary-timeline {
             max-width: 800px;
             margin: 3rem auto;
             padding: 0 1.5rem;
             position: relative;
+            box-sizing: border-box;
         }
 
-        /* Subtle vertical line connecting diary entries */
         .diary-timeline::before {
             content: '';
             position: absolute;
@@ -124,7 +178,6 @@
             background: linear-gradient(to bottom, rgba(59, 130, 246, 0.3) 0%, rgba(30, 41, 59, 0.1) 100%);
         }
 
-        /* Diary Entry Card Structure */
         .diary-entry {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -133,14 +186,8 @@
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.04);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease;
         }
 
-        .diary-entry:hover {
-            border-color: rgba(59, 130, 246, 0.3);
-        }
-
-        /* Date Marker on the left margin line */
         .entry-marker {
             position: absolute;
             left: -2.35rem;
@@ -154,7 +201,6 @@
             z-index: 2;
         }
 
-        /* Entry Header Metadata */
         .entry-meta {
             display: flex;
             justify-content: space-between;
@@ -164,16 +210,8 @@
             margin-bottom: 1.25rem;
         }
 
-        .entry-date {
-            font-size: 1.15rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .entry-tags {
-            display: flex;
-            gap: 0.5rem;
-        }
+        .entry-date { font-size: 1.15rem; font-weight: 700; }
+        .entry-tags { display: flex; gap: 0.5rem; align-items: center; }
 
         .tag {
             font-size: 0.7rem;
@@ -181,43 +219,24 @@
             text-transform: uppercase;
             padding: 0.2rem 0.6rem;
             border-radius: 4px;
-            letter-spacing: 0.03em;
         }
-
         .tag-week { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
-        .tag-status { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 
-        /* Diary Content Styling */
-        .entry-body p {
-            margin: 0 0 1rem 0;
-            color: #cbd5e1;
-            font-size: 0.98rem;
+        .delete-btn {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+            padding: 0 0.25rem;
         }
+        .delete-btn:hover { opacity: 1; }
 
-        /* Custom Task Sub-Listings */
-        .task-list {
-            list-style: none;
-            padding: 0;
-            margin: 1rem 0;
-        }
+        .entry-body p { margin: 0 0 1rem 0; color: #cbd5e1; font-size: 0.98rem; white-space: pre-line; }
 
-        .task-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.4rem;
-            font-size: 0.95rem;
-            color: #e2e8f0;
-        }
-
-        .task-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        /* Code & Mathematical Equation Box Wrapper */
         .code-block {
             background: #090d16;
             border-radius: 8px;
@@ -228,16 +247,10 @@
             margin: 1.25rem 0;
             border-left: 3px solid var(--primary);
             overflow-x: auto;
+            white-space: pre-wrap;
         }
 
-        footer {
-            text-align: center;
-            padding: 4rem 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 8rem;
-        }
+        footer { text-align: center; padding: 4rem 1.5rem; color: var(--text-muted); font-size: 0.85rem; margin-top: 6rem; }
     </style>
 </head>
 <body>
@@ -247,71 +260,140 @@
         <p>A Year-Long Quantitative Milestone Tracking Diary</p>
     </header>
 
-    <!-- Metrics Bar Ecosystem -->
     <div class="metrics-bar">
         <a href="index.html" class="back-btn">← Back to Dashboard</a>
         <div class="counter-cluster">
-            <div class="counter-pill">Days Logged: <span>2</span></div>
-            <div class="counter-pill">Sprint Progress: <span>0.5%</span></div>
+            <div class="counter-pill">Days Logged: <span id="days-count">0</span></div>
+            <div class="counter-pill">Sprint Progress: <span id="sprint-progress">0%</span></div>
         </div>
     </div>
 
-    <!-- Main Diary Feed -->
-    <div class="diary-timeline">
-
-        <!-- DIARY ENTRY MODEL 2 (Most Recent) -->
-        <div class="diary-entry">
-            <div class="entry-marker"></div>
-            <div class="entry-meta">
-                <div class="entry-date">June 25, 2026</div>
-                <div class="entry-tags">
-                    <span class="tag tag-week">Week 01</span>
-                    <span class="tag tag-status">Completed</span>
+    <!-- Live Entry Logging Input Interface -->
+    <div class="form-container">
+        <div class="diary-form">
+            <h3 class="form-title">⚡ Log Today's Milestone</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="entryDate">Date</label>
+                    <input type="date" id="entryDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="entryWeek">Week Number</label>
+                    <input type="number" id="entryWeek" placeholder="e.g. 1" min="1" max="52" required>
                 </div>
             </div>
-            <div class="entry-body">
-                <p>Shifted focus into formal consumer optimizations under the microeconomic module. Evaluated standard utility maximization problems subject to budget allocations.</p>
-                
-                <ul class="task-list">
-                    <li>Derived demand parameters using traditional Lagrangian function modeling.</li>
-                    <li>Mapped out corner solutions involving linear perfect substitution preferences.</li>
-                    <li>Logged 4 proof-centric calculus problems verifying quasi-concavity metrics.</li>
-                </ul>
-
-                <div class="code-block">
-                    Max U(x, y) s.t. Px*x + Py*y = I <br>
-                    L = U(x, y) + λ(I - Px*x - Py*y) <br>
-                    FOC: dL/dx = 0 -> dU/dx = λ*Px
-                </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="entryText">What did you achieve today?</label>
+                <textarea id="entryText" rows="4" placeholder="List concepts reviewed, questions solved, or performance benchmarks..." required></textarea>
             </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="entryFormula">Equations / Code Block (Optional)</label>
+                <textarea id="entryFormula" rows="2" placeholder="Drop LaTeX, expressions, or code snippets here..."></textarea>
+            </div>
+            <button type="button" class="submit-btn" onclick="saveEntry()">Save Entry to Workspace</button>
         </div>
-
-        <!-- DIARY ENTRY MODEL 1 (The Beginning) -->
-        <div class="diary-entry">
-            <div class="entry-marker"></div>
-            <div class="entry-meta">
-                <div class="entry-date">June 24, 2026</div>
-                <div class="entry-tags">
-                    <span class="tag tag-week">Week 01</span>
-                    <span class="tag tag-status">Completed</span>
-                </div>
-            </div>
-            <div class="entry-body">
-                <p>Official deployment of the localized year-long preparation tracking environment. Set up structural study targets focused heavily on Core Algebra foundations and macro matrix structures.</p>
-                
-                <ul class="task-list">
-                    <li>Re-evaluated core expansion metrics relating to the Binomial Theorem.</li>
-                    <li>Drafted standard structural pathways for Matrix representations and operations.</li>
-                    <li>Finalized clean deployment of local workspace repository interfaces.</li>
-                </ul>
-            </div>
-        </div>
-
     </div>
+
+    <!-- Output Feed Ecosystem -->
+    <div class="diary-timeline" id="timeline-feed"></div>
 
     <footer>
         <p>Consistent incremental tracking yields exponential results over a 365-day vector.</p>
     </footer>
 
+    <script>
+        // Set today's date automatically in the input box on load
+        document.getElementById('entryDate').valueAsDate = new Date();
+
+        // Load existing logs or start fresh
+        let diaryLogs = JSON.parse(localStorage.getItem('isi_diary_logs')) || [];
+
+        function renderLogs() {
+            const feed = document.getElementById('timeline-feed');
+            feed.innerHTML = '';
+
+            // Sort newest date first
+            diaryLogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            diaryLogs.forEach((log, index) => {
+                // Formatting display date beautifully
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = new Date(log.date).toLocaleDateString('en-US', options);
+
+                let formulaHTML = '';
+                if (log.formula && log.formula.trim() !== '') {
+                    formulaHTML = `<div class="code-block">${escapeHTML(log.formula)}</div>`;
+                }
+
+                const entryCard = document.createElement('div');
+                entryCard.className = 'diary-entry';
+                entryCard.innerHTML = `
+                    <div class="entry-marker"></div>
+                    <div class="entry-meta">
+                        <div class="entry-date">${formattedDate}</div>
+                        <div class="entry-tags">
+                            <span class="tag tag-week">Week ${escapeHTML(log.week)}</span>
+                            <button class="delete-btn" onclick="deleteEntry(${index})">Delete</button>
+                        </div>
+                    </div>
+                    <div class="entry-body">
+                        <p>${escapeHTML(log.text)}</p>
+                        ${formulaHTML}
+                    </div>
+                `;
+                feed.appendChild(entryCard);
+            });
+
+            // Update Metric Status Indicators
+            const totalDays = diaryLogs.length;
+            document.getElementById('days-count').innerText = totalDays;
+            document.getElementById('sprint-progress').innerText = ((totalDays / 365) * 100).toFixed(1) + '%';
+        }
+
+        function saveEntry() {
+            const dateInput = document.getElementById('entryDate').value;
+            const weekInput = document.getElementById('entryWeek').value;
+            const textInput = document.getElementById('entryText').value;
+            const formulaInput = document.getElementById('entryFormula').value;
+
+            if (!dateInput || !weekInput || !textInput.trim()) {
+                alert('Please fill out the Date, Week, and Achievement description fields!');
+                return;
+            }
+
+            const newLog = {
+                date: dateInput,
+                week: weekInput,
+                text: textInput,
+                formula: formulaInput
+            };
+
+            diaryLogs.push(newLog);
+            localStorage.setItem('isi_diary_logs', JSON.stringify(diaryLogs));
+            
+            // Clear description inputs, leave date/week for rapid inputs
+            document.getElementById('entryText').value = '';
+            document.getElementById('entryFormula').value = '';
+            
+            renderLogs();
+        }
+
+        function deleteEntry(index) {
+            if (confirm('Are you sure you want to remove this entry?')) {
+                diaryLogs.splice(index, 1);
+                localStorage.setItem('isi_diary_logs', JSON.stringify(diaryLogs));
+                renderLogs();
+            }
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // Initialize display on startup
+        renderLogs();
+    </script>
 </body>
 </html>
