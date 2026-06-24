@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Concept Workspace</title>
+    <title>Self-Storing Workspace</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -13,7 +13,6 @@
             --primary: #3b82f6;
             --border-radius: 16px;
             --success: #10b981;
-            --accent: #64748b;
         }
 
         body {
@@ -23,7 +22,6 @@
             line-height: 1.7;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
         }
 
         header {
@@ -37,25 +35,13 @@
             margin: 0;
             font-size: 2.5rem;
             font-weight: 800;
-            letter-spacing: -0.05em;
             background: linear-gradient(to right, #ffffff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        header p {
-            margin: 0.5rem 0 0 0;
-            font-size: 1.1rem;
-            color: #60a5fa;
-            font-weight: 500;
-        }
-
-        .nav-bar {
-            max-width: 800px;
-            margin: 1.5rem auto;
-            padding: 0 1.5rem;
-        }
-
+        .nav-bar { max-width: 800px; margin: 1.5rem auto; padding: 0 1.5rem; }
+        
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -67,19 +53,10 @@
             color: var(--text-main);
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
         }
 
-        .back-btn:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(-2px); }
+        .container { max-width: 800px; margin: 0 auto 5rem auto; padding: 0 1.5rem; }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto 5rem auto;
-            padding: 0 1.5rem;
-            box-sizing: border-box;
-        }
-
-        /* Notes Input Workspace Panel */
         .workspace-panel {
             background: rgba(30, 41, 59, 0.5);
             border-radius: var(--border-radius);
@@ -88,28 +65,9 @@
             margin-bottom: 2.5rem;
         }
 
-        .panel-title {
-            margin: 0 0 1.5rem 0;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #93c5fd;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-
+        .form-group { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+        .form-group label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+        
         .form-group textarea {
             background: #0f172a;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -118,96 +76,38 @@
             color: var(--text-main);
             font-family: inherit;
             font-size: 1rem;
-            line-height: 1.6;
-            resize: vertical;
-            transition: border-color 0.2s ease;
         }
 
-        .form-group textarea:focus { outline: none; border-color: var(--primary); }
-
-        /* Multi-Button Layout Engine */
-        .action-cluster {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .btn {
+        .btn-save {
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.2s ease;
-            text-align: center;
-            display: inline-block;
-            box-sizing: border-box;
-        }
-        .btn:hover { opacity: 0.9; }
-
-        .btn-save { background: linear-gradient(135deg, #2563eb, #1d4ed8); width: 100%; }
-        .btn-download { background: linear-gradient(135deg, #10b981, #059669); }
-        .btn-upload { background: linear-gradient(135deg, #64748b, #475569); }
-
-        .sync-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
+            width: 100%;
         }
 
-        /* Saved Reference Render Canvas */
         .display-canvas {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 2.5rem;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-            min-height: 150px;
         }
 
-        .display-canvas h2 {
-            margin: 0 0 1.5rem 0;
-            font-size: 1.6rem;
-            font-weight: 700;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .notes-segment {
-            font-size: 1.05rem;
-            color: #cbd5e1;
-            white-space: pre-line;
-            margin-bottom: 2rem;
-        }
-
-        .formula-segment {
-            background: #090d16;
-            border-radius: 8px;
-            padding: 1.25rem;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem;
-            color: #38bdf8;
-            border-left: 4px solid var(--primary);
-            overflow-x: auto;
-            white-space: pre-wrap;
-        }
-
-        .empty-text {
-            color: var(--text-muted);
-            font-style: italic;
-            text-align: center;
-            padding: 2rem 0;
-        }
+        .display-canvas h2 { margin: 0 0 1.5rem 0; font-size: 1.6rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.5rem; }
+        
+        #static-notes { font-size: 1.05rem; color: #cbd5e1; white-space: pre-line; margin-bottom: 2rem; }
+        #static-formulas { background: #090d16; border-radius: 8px; padding: 1.25rem; font-family: monospace; color: #38bdf8; border-left: 4px solid var(--primary); white-space: pre-wrap; }
     </style>
 </head>
 <body>
 
     <header>
         <h1 id="page-title">Binomial Theorem</h1>
-        <p>Personal Study Notes & Proof Workspace</p>
+        <p>Self-Contained Study Vault</p>
     </header>
 
     <div class="nav-bar">
@@ -215,131 +115,68 @@
     </div>
 
     <div class="container">
-
         <div class="workspace-panel">
-            <h3 class="panel-title">📝 Update Workspace Content</h3>
-            
             <div class="form-group">
-                <label for="conceptNotes">My Core Understanding & Explanations</label>
-                <textarea id="conceptNotes" rows="8" placeholder="Type out your personalized understanding, proof conditions, notes, and rules here..."></textarea>
+                <label>My Core Understanding & Explanations</label>
+                <textarea id="edit-notes" rows="6" placeholder="Type notes here..."></textarea>
             </div>
-            
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label for="conceptFormulas">Key Formulas / Equations Block</label>
-                <textarea id="conceptFormulas" rows="3" placeholder="Drop important mathematical expressions or key formulas here..."></textarea>
+            <div class="form-group">
+                <label>Key Formulas / Equations Block</label>
+                <textarea id="edit-formulas" rows="3" placeholder="Type formulas here..."></textarea>
             </div>
-            
-            <div class="action-cluster">
-                <button type="button" class="btn btn-save" onclick="updateWorkspace()">Save Local Changes</button>
-                
-                <div class="sync-row">
-                    <button type="button" class="btn btn-download" onclick="downloadDataFile()">📥 Download Data File</button>
-                    
-                    <label class="btn btn-upload">
-                        📤 Load Data File
-                        <input type="file" accept=".json" style="display: none;" onchange="uploadDataFile(event)">
-                    </label>
-                </div>
-            </div>
+            <button type="button" class="btn-save" onclick="bakeAndDownloadHTML()">💾 Save & Update HTML File</button>
         </div>
 
         <div class="display-canvas">
-            <h2>Saved Core Reference</h2>
-            <div id="canvas-content">
-                <div class="empty-text">No custom notes loaded. Use the panel above to populate your workspace canvas.</div>
-            </div>
+            <h2>Saved Reference</h2>
+            <div id="static-notes">Initial setup complete. Type your notes above to overwrite this text permanently!</div>
+            <div id="static-formulas">No formulas saved yet.</div>
         </div>
-
     </div>
 
     <script>
-        // Use the title text to generate a unique entry point identifier for local browsers
-        const uniqueStorageKey = "isi_note_" + document.getElementById('page-title').innerText.replace(/\s+/g, '_').toLowerCase();
+        // On boot, read what is written in the static HTML segments and put it in the editor
+        document.getElementById('edit-notes').value = document.getElementById('static-notes').innerText;
+        document.getElementById('edit-formulas').value = document.getElementById('static-formulas').innerText;
 
-        // Load existing customized layout parameters on initialization
-        function loadCanvas() {
-            const storedData = JSON.parse(localStorage.getItem(uniqueStorageKey));
-            const contentContainer = document.getElementById('canvas-content');
+        function bakeAndDownloadHTML() {
+            const freshNotes = document.getElementById('edit-notes').value;
+            const freshFormulas = document.getElementById('edit-formulas').value;
 
-            if (storedData && (storedData.notes.trim() || storedData.formulas.trim())) {
-                let htmlOutput = '';
-                
-                if (storedData.notes.trim()) {
-                    htmlOutput += `<div class="notes-segment">${escapeHTML(storedData.notes)}</div>`;
-                }
-                
-                if (storedData.formulas.trim()) {
-                    htmlOutput += `<div class="formula-segment">${escapeHTML(storedData.formulas)}</div>`;
-                }
-                
-                contentContainer.innerHTML = htmlOutput;
-                
-                document.getElementById('conceptNotes').value = storedData.notes;
-                document.getElementById('conceptFormulas').value = storedData.formulas;
-            } else {
-                contentContainer.innerHTML = `<div class="empty-text">No custom notes loaded. Use the panel above to populate your workspace canvas.</div>`;
-            }
-        }
+            // Update the live viewing panel text elements immediately
+            document.getElementById('static-notes').innerText = freshNotes;
+            document.getElementById('static-formulas').innerText = freshFormulas;
 
-        function updateWorkspace() {
-            const notesInput = document.getElementById('conceptNotes').value;
-            const formulasInput = document.getElementById('conceptFormulas').value;
-
-            const conceptWorkspaceData = {
-                notes: notesInput,
-                formulas: formulasInput
-            };
-
-            localStorage.setItem(uniqueStorageKey, JSON.stringify(conceptWorkspaceData));
-            loadCanvas();
-        }
-
-        // 📥 Export data to a physical file for cross-device sharing via your repo folder
-        function downloadDataFile() {
-            const notes = document.getElementById('conceptNotes').value;
-            const formulas = document.getElementById('conceptFormulas').value;
+            // Grab the entire updated text string of this exact open webpage file
+            let entirePageCode = document.documentElement.outerHTML;
             
-            if(!notes.trim() && !formulas.trim()) {
-                alert("The workspace canvas fields are currently empty!");
-                return;
-            }
+            // Clean up the input textarea element values so they default to your new text on next load
+            entirePageCode = entirePageCode.replace(
+                /<textarea id="edit-notes"([^>]*)>([\s\S]*?)<\/textarea>/,
+                `<textarea id="edit-notes"$1>${escapeHTML(freshNotes)}</textarea>`
+            );
+            entirePageCode = entirePageCode.replace(
+                /<textarea id="edit-formulas"([^>]*)>([\s\S]*?)<\/textarea>/,
+                `<textarea id="edit-formulas"$1>${escapeHTML(freshFormulas)}</textarea>`
+            );
 
-            const dataPayload = JSON.stringify({ notes, formulas }, null, 2);
-            const blob = new Blob([dataPayload], { type: "application/json" });
-            const link = document.createElement("a");
+            // Reassemble the full file package
+            const fullBlobContent = "<!DOCTYPE html>\n<html lang=\"en\">\n" + entirePageCode + "\n</html>";
             
-            link.href = URL.createObjectURL(blob);
-            link.download = `${uniqueStorageKey}_data.json`;
-            link.click();
-        }
-
-        // 📤 Load data from a backup file back into the working runtime environment
-        function uploadDataFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const parsedData = JSON.parse(e.target.result);
-                    document.getElementById('conceptNotes').value = parsedData.notes || '';
-                    document.getElementById('conceptFormulas').value = parsedData.formulas || '';
-                    updateWorkspace();
-                } catch (err) {
-                    alert("Invalid data file parameters detected.");
-                }
-            };
-            reader.readAsText(file);
+            const blob = new Blob([fullBlobContent], { type: "text/html" });
+            const downloaderLink = document.createElement("a");
+            
+            // Deduce the clean matching filename based on the title header
+            const fileName = document.getElementById('page-title').innerText.replace(/\s+/g, '-').toLowerCase() + ".html";
+            
+            downloaderLink.href = URL.createObjectURL(blob);
+            downloaderLink.download = fileName;
+            downloaderLink.click();
         }
 
         function escapeHTML(str) {
-            return str.replace(/[&<>'"]/g, 
-                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-            );
+            return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
-
-        // Run rendering sequence
-        loadCanvas();
     </script>
 </body>
 </html>
