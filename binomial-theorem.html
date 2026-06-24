@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Git-Sync Workspace</title>
@@ -135,7 +135,7 @@
 
     <div class="container">
         <!-- Settings Panel (Hidden until clicked) -->
-        <div id="settings-panel" class="panel hidden">
+        <div id="settings-panel" class="panel">
             <h3>🔑 GitHub Token Configuration</h3>
             <p style="color: var(--text-muted); font-size: 0.85rem;">Tokens are saved safely in your private browser storage. They are never published to GitHub.</p>
             <div class="form-group">
@@ -149,14 +149,14 @@
         <div class="panel">
             <div class="form-group">
                 <label>Core Understandings</label>
-                <textarea id="edit-notes" rows="5" placeholder="Type core concepts..."></textarea>
+                <textarea id="edit-notes" rows="5" placeholder="Type core concepts...">Initial setup complete. Run connection setup, update notes, and click push!</textarea>
             </div>
             <div class="form-group">
                 <label>Formulas / Equations</label>
-                <textarea id="edit-formulas" rows="2" placeholder="Type math notations..."></textarea>
+                <textarea id="edit-formulas" rows="2" placeholder="Type math notations...">No formulas saved yet.</textarea>
             </div>
-            <button type="button" class="btn-save" onclick="syncWithGitHub()">🚀 Save & Commit directly to GitHub</button>
-            <div id="status-msg" class="hidden"></div>
+            <button type="button" class="btn-save" onclick="syncWithGitHub()">🚀 Save &amp; Commit directly to GitHub</button>
+            <div id="status-msg" class="status-loading">⏳ Connecting to GitHub API...</div>
         </div>
 
         <!-- Rendered View -->
@@ -266,5 +266,7 @@
             return str.replace(/[&<>'"]/g, tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
         }
     </script>
-</body>
+
+
+</body></html>
 </html>
