@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Workspace</title>
+    <title>Personal Concept Workspace</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -13,6 +13,7 @@
             --primary: #3b82f6;
             --border-radius: 16px;
             --success: #10b981;
+            --accent: #64748b;
         }
 
         body {
@@ -78,7 +79,7 @@
             box-sizing: border-box;
         }
 
-        /* Notes Input Workspace */
+        /* Notes Input Workspace Panel */
         .workspace-panel {
             background: rgba(30, 41, 59, 0.5);
             border-radius: var(--border-radius);
@@ -124,21 +125,39 @@
 
         .form-group textarea:focus { outline: none; border-color: var(--primary); }
 
-        .save-btn {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        /* Multi-Button Layout Engine */
+        .action-cluster {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn {
             color: white;
             border: none;
             padding: 0.8rem 1.5rem;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             border-radius: 8px;
             cursor: pointer;
             transition: opacity 0.2s ease;
-            width: 100%;
+            text-align: center;
+            display: inline-block;
+            box-sizing: border-box;
         }
-        .save-btn:hover { opacity: 0.9; }
+        .btn:hover { opacity: 0.9; }
 
-        /* Saved Display Canvas */
+        .btn-save { background: linear-gradient(135deg, #2563eb, #1d4ed8); width: 100%; }
+        .btn-download { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-upload { background: linear-gradient(135deg, #64748b, #475569); }
+
+        .sync-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        /* Saved Reference Render Canvas */
         .display-canvas {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
@@ -210,7 +229,18 @@
                 <textarea id="conceptFormulas" rows="3" placeholder="Drop important mathematical expressions or key formulas here..."></textarea>
             </div>
             
-            <button type="button" class="save-btn" onclick="updateWorkspace()">Save Changes to Workspace</button>
+            <div class="action-cluster">
+                <button type="button" class="btn btn-save" onclick="updateWorkspace()">Save Local Changes</button>
+                
+                <div class="sync-row">
+                    <button type="button" class="btn btn-download" onclick="downloadDataFile()">📥 Download Data File</button>
+                    
+                    <label class="btn btn-upload">
+                        📤 Load Data File
+                        <input type="file" accept=".json" style="display: none;" onchange="uploadDataFile(event)">
+                    </label>
+                </div>
+            </div>
         </div>
 
         <div class="display-canvas">
@@ -223,10 +253,10 @@
     </div>
 
     <script>
-        // Use the header text to create a unique tracking key for localStorage
+        // Use the title text to generate a unique entry point identifier for local browsers
         const uniqueStorageKey = "isi_note_" + document.getElementById('page-title').innerText.replace(/\s+/g, '_').toLowerCase();
 
-        // Load existing customized data on startup
+        // Load existing customized layout parameters on initialization
         function loadCanvas() {
             const storedData = JSON.parse(localStorage.getItem(uniqueStorageKey));
             const contentContainer = document.getElementById('canvas-content');
@@ -244,9 +274,10 @@
                 
                 contentContainer.innerHTML = htmlOutput;
                 
-                // Populate the inputs with what you previously saved so you can edit it anytime
                 document.getElementById('conceptNotes').value = storedData.notes;
                 document.getElementById('conceptFormulas').value = storedData.formulas;
+            } else {
+                contentContainer.innerHTML = `<div class="empty-text">No custom notes loaded. Use the panel above to populate your workspace canvas.</div>`;
             }
         }
 
@@ -263,13 +294,51 @@
             loadCanvas();
         }
 
+        // 📥 Export data to a physical file for cross-device sharing via your repo folder
+        function downloadDataFile() {
+            const notes = document.getElementById('conceptNotes').value;
+            const formulas = document.getElementById('conceptFormulas').value;
+            
+            if(!notes.trim() && !formulas.trim()) {
+                alert("The workspace canvas fields are currently empty!");
+                return;
+            }
+
+            const dataPayload = JSON.stringify({ notes, formulas }, null, 2);
+            const blob = new Blob([dataPayload], { type: "application/json" });
+            const link = document.createElement("a");
+            
+            link.href = URL.createObjectURL(blob);
+            link.download = `${uniqueStorageKey}_data.json`;
+            link.click();
+        }
+
+        // 📤 Load data from a backup file back into the working runtime environment
+        function uploadDataFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsedData = JSON.parse(e.target.result);
+                    document.getElementById('conceptNotes').value = parsedData.notes || '';
+                    document.getElementById('conceptFormulas').value = parsedData.formulas || '';
+                    updateWorkspace();
+                } catch (err) {
+                    alert("Invalid data file parameters detected.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
         function escapeHTML(str) {
             return str.replace(/[&<>'"]/g, 
                 tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
             );
         }
 
-        // Initialize setup on page visibility initialization
+        // Run rendering sequence
         loadCanvas();
     </script>
 </body>
