@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Master: Binomial Theorem</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --math-color: #10b981;
+            --math-glow: rgba(16, 185, 129, 0.15);
+            --primary: #3b82f6;
+            --border-radius: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background: radial-gradient(circle at top, #064e3b 0%, #0f172a 100%);
+            text-align: center;
+            padding: 4rem 2rem 2.5rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #ffffff, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-size: 1.1rem;
+            color: #34d399;
+            font-weight: 500;
+        }
+
+        .nav-bar {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(-2px); }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto 4rem auto;
+            padding: 0 1.5rem;
+            box-sizing: border-box;
+        }
+
+        /* Interactive UI Engine Widget */
+        .workspace-widget {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: var(--border-radius);
+            padding: 2.25rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2.5rem;
+        }
+
+        .widget-title {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #a7f3d0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-end;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus { outline: none; border-color: var(--math-color); }
+
+        .calc-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            height: 45px;
+        }
+        .calc-btn:hover { opacity: 0.9; }
+
+        .output-zone {
+            background: #090d16;
+            border-radius: 8px;
+            padding: 1.25rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            color: #34d399;
+            border-left: 3px solid var(--math-color);
+            overflow-x: auto;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Standard Content Documentation Core */
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 2.5rem;
+        }
+
+        .info-card h3 {
+            margin: 0 0 1.25rem 0;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 0.5rem;
+        }
+
+        .formula-display {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f8fafc;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .properties-list {
+            padding-left: 1.25rem;
+            margin: 0;
+        }
+
+        .properties-list li {
+            margin-bottom: 0.75rem;
+            color: #cbd5e1;
+        }
+
+        .properties-list strong {
+            color: var(--text-main);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Binomial Theorem</h1>
+        <p>PEA Quantitative Entrance Syllabus Module</p>
+    </header>
+
+    <div class="nav-bar">
+        <a href="index.html" class="back-btn">← Home Dashboard</a>
+    </div>
+
+    <div class="container">
+
+        <div class="workspace-widget">
+            <h3 class="widget-title">🧮 Live Algebraic Expansion Sandbox</h3>
+            <div class="input-row">
+                <div class="form-group">
+                    <label for="powerN">Enter Power (n)</label>
+                    <input type="number" id="powerN" value="4" min="0" max="15">
+                </div>
+                <button class="calc-btn" onclick="expandBinomial()">Expand (x + y)ⁿ</button>
+            </div>
+            <div class="form-group">
+                <label>Resulting Expansion Matrix</label>
+                <div class="output-zone" id="expansionOutput">(x + y)⁴ = x⁴ + 4x³y + 6x²y² + 4xy³ + y⁴</div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>Standard Theorem Foundations</h3>
+            <p>For any positive integer n, the expansion of a binomial expression can be written systematically using combinatorial coefficients:</p>
+            <div class="formula-display">
+                (x + y)ⁿ = ∑ⁿ_{r=0} ⁿCᵣ xⁿ⁻ʳ yʳ
+            </div>
+            <p>Where the binomial coefficient is evaluated as:</p>
+            <div class="formula-display" style="font-size: 1.1rem; width: fit-content; margin: 0 auto 1.5rem auto; padding: 0.75rem 2rem;">
+                ⁿCᵣ = n! / [r!(n - r)!]
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>Critical Properties for ISI Entrance Evaluation</h3>
+            <ul class="properties-list">
+                <li><strong>Total Structural Terms:</strong> The expansion contains exactly <strong>n + 1</strong> terms.</li>
+                <li><strong>General Term Expression ($T_{r+1}$):</strong> Used to target explicit variables in fractional polynomial evaluations:
+                    <div style="background: #0f172a; padding: 0.5rem 1rem; border-radius: 6px; margin: 0.5rem 0; width: fit-content; font-family: monospace;">Tᵣ₊₁ = ⁿCᵣ · xⁿ⁻ʳ · yᵣ</div>
+                </li>
+                <li><strong>Symmetry Metric:</strong> Coefficients from the start and finish vectors are identical because <strong>ⁿCᵣ = ⁿCₙ₋ᵣ</strong>.</li>
+                <li><strong>Sum of Coefficients Matrix:</strong> Set variables $x=1, y=1$ to evaluate combinatorial limits:
+                    <div style="background: #0f172a; padding: 0.5rem 1rem; border-radius: 6px; margin: 0.5rem 0; width: fit-content; font-family: monospace;">ⁿC₀ + ⁿC₁ + ⁿC₂ + ... + ⁿCₙ = 2ⁿ</div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Indian Statistical Institute (ISI) Study Platform — Master of Science in Quantitative Economics</p>
+    </footer>
+
+    <script>
+        function getCombinations(n, r) {
+            if (r === 0 || r === n) return 1;
+            if (r > n) return 0;
+            
+            let numerator = 1;
+            let denominator = 1;
+            for (let i = 1; i <= r; i++) {
+                numerator *= (n - i + 1);
+                denominator *= i;
+            }
+            return numerator / denominator;
+        }
+
+        function expandBinomial() {
+            const n = parseInt(document.getElementById('powerN').value);
+            if (isNaN(n) || n < 0) {
+                alert("Please enter a valid positive integer!");
+                return;
+            }
+            if (n > 15) {
+                alert("Please select a power ≤ 15 to maintain smooth UI presentation layers.");
+                return;
+            }
+
+            if (n === 0) {
+                document.getElementById('expansionOutput').innerHTML = "(x + y)⁰ = 1";
+                return;
+            }
+
+            let resultSegments = [];
+
+            for (let r = 0; r <= n; r++) {
+                let coeff = getCombinations(n, r);
+                let termStr = "";
+
+                // Coefficient formatting handling
+                if (coeff !== 1 || (n === 0)) {
+                    termStr += coeff;
+                }
+
+                // Variable X power assignment handling
+                let xPower = n - r;
+                if (xPower > 0) {
+                    termStr += "x";
+                    if (xPower > 1) {
+                        termStr += `<sup>${xPower}</sup>`;
+                    }
+                }
+
+                // Variable Y power assignment handling
+                let yPower = r;
+                if (yPower > 0) {
+                    termStr += "y";
+                    if (yPower > 1) {
+                        termStr += `<sup>${yPower}</sup>`;
+                    }
+                }
+
+                resultSegments.push(termStr);
+            }
+
+            let fullFormula = `(x + y)<sup>${n}</sup> = ` + resultSegments.join(" + ");
+            document.getElementById('expansionOutput').innerHTML = fullFormula;
+        }
+    </script>
+</body>
+</html>
