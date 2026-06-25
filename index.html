@@ -3,473 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISI MSQE Preparation Hub</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #3b82f6;
-            --primary-glow: rgba(59, 130, 246, 0.15);
-            
-            --math-color: #10b981;
-            --math-glow: rgba(16, 185, 129, 0.15);
-            
-            --stats-color: #8b5cf6;
-            --stats-glow: rgba(139, 92, 246, 0.15);
-            
-            --micro-color: #f97316;
-            --micro-glow: rgba(249, 115, 22, 0.15);
-            
-            --macro-color: #ec4899;
-            --macro-glow: rgba(236, 72, 153, 0.15);
-            
-            --border-radius: 16px;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        header {
-            background: radial-gradient(circle at top, #1e3a8a 0%, #0f172a 100%);
-            text-align: center;
-            padding: 4.5rem 2rem 3.5rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.75rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            background: linear-gradient(to right, #ffffff, #93c5fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            margin: 0.75rem 0 0 0;
-            font-size: 1.2rem;
-            color: #60a5fa;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-        }
-
-        /* Modern Dashboard Bar */
-        .dashboard-bar {
-            max-width: 1000px;
-            margin: 2.5rem auto 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            background: rgba(30, 41, 59, 0.7);
-            padding: 1.25rem 1.75rem;
-            border-radius: var(--border-radius);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .dash-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-achieve { background: linear-gradient(135deg, #0284c7, #0369a1); }
-        .btn-achieve:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(2, 132, 199, 0.4); }
-
-        .btn-pyq { background: linear-gradient(135deg, #4f46e5, #4338ca); }
-        .btn-pyq:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(79, 70, 229, 0.4); }
-
-        .stats-tracker {
-            display: flex;
-            gap: 0.5rem;
-            background: rgba(15, 23, 42, 0.8);
-            padding: 0.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 0.25rem 1rem;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
-        }
-
-        .stat-num {
-            display: block;
-            font-size: 1.35rem;
-            font-weight: 800;
-        }
-
-        .stat-label {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
-            margin-top: 0.15rem;
-        }
-
-        /* Container & Grid Layout */
-        .container {
-            max-width: 1240px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
-            gap: 2.5rem;
-        }
-
-        /* Modernized Cards */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 2.25rem;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Active Glow Sub-Themes per Card */
-        .card.math-card:hover { border-color: var(--math-color); box-shadow: 0 0 30px var(--math-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
-        .card.stats-card:hover { border-color: var(--stats-color); box-shadow: 0 0 30px var(--stats-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
-        .card.micro-card:hover { border-color: var(--micro-color); box-shadow: 0 0 30px var(--micro-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
-        .card.macro-card:hover { border-color: var(--macro-color); box-shadow: 0 0 30px var(--macro-glow), 0 20px 25px -5px rgba(0,0,0,0.3); }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 1.25rem;
-            margin-bottom: 2rem;
-        }
-
-        .card-title {
-            margin: 0;
-            font-size: 1.6rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 0.35rem 0.85rem;
-            border-radius: 6px;
-            margin-right: 1.25rem;
-            color: white;
-            letter-spacing: 0.05em;
-        }
-
-        .math-badge { background-color: var(--math-color); box-shadow: 0 0 12px var(--math-glow); }
-        .stats-badge { background-color: var(--stats-color); box-shadow: 0 0 12px var(--stats-glow); }
-        .micro-badge { background-color: var(--micro-color); box-shadow: 0 0 12px var(--micro-glow); }
-        .macro-badge { background-color: var(--macro-color); box-shadow: 0 0 12px var(--macro-glow); }
-
-        .topic-group {
-            margin-bottom: 2rem;
-        }
-
-        .topic-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .topic-group h4 {
-            margin: 0 0 0.85rem 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 700;
-        }
-
-        .syllabus-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .syllabus-list li {
-            position: relative;
-            padding-left: 1.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .syllabus-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--text-muted);
-            transition: color 0.2s ease, transform 0.2s ease;
-            font-weight: bold;
-        }
-
-        .syllabus-list li:hover::before {
-            transform: translateX(3px);
-        }
-
-        .math-card .syllabus-list li:hover::before { color: var(--math-color); }
-        .stats-card .syllabus-list li:hover::before { color: var(--stats-color); }
-        .micro-card .syllabus-list li:hover::before { color: var(--micro-color); }
-        .macro-card .syllabus-list li:hover::before { color: var(--macro-color); }
-
-        .syllabus-list a {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 400;
-            transition: color 0.2s ease;
-        }
-
-        .syllabus-list a:hover {
-            color: #ffffff;
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem 1.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 6rem;
-            letter-spacing: 0.02em;
-        }
-
-        @media (max-width: 1200px) {
-            .grid { grid-template-columns: 1fr; max-width: 700px; margin: 0 auto; }
-        }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.2rem; }
-            .dashboard-bar { flex-direction: column; padding: 1.5rem; }
-            .nav-buttons { width: 100%; flex-direction: column; }
-            .stats-tracker { width: 100%; justify-content: space-around; }
-            .card { padding: 1.5rem; }
-        }
-    </style>
+    <title>Play & Learn Child Development Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>ISI Preparation Hub</h1>
-        <p>Syllabus for MSQE Admission Test 2026</p>
-
-        <div class="dashboard-bar">
-            <div class="nav-buttons">
-                <a href="achievements.html" class="dash-btn btn-achieve">
-                    🏆 Daily Achievements
-                </a>
-                <a href="pyqs.html" class="dash-btn btn-pyq">
-                    📝 Past Year Questions (PYQs)
-                </a>
-            </div>
-
-            <div class="stats-tracker">
-                <div class="stat-item">
-                    <span class="stat-num" style="color: var(--math-color);">0</span>
-                    <span class="stat-label">Math Qns</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" style="color: var(--stats-color);">0</span>
-                    <span class="stat-label">Stats Qns</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" style="color: var(--micro-color);">0</span>
-                    <span class="stat-label">Micro Qns</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num" style="color: var(--macro-color);">0</span>
-                    <span class="stat-label">Macro Qns</span>
-                </div>
-            </div>
+    <header class="navbar">
+        <div class="logo">
+            <span class="brand-text">Play & Learn</span>
+            <span class="sub-text">Child Development Center</span>
         </div>
+        <nav class="nav-links">
+            <a href="#about">About</a>
+            <a href="#hours">Hours</a>
+            <a href="#contact" class="btn-primary">Contact Us</a>
+        </nav>
     </header>
 
-    <div class="container">
-        <div class="grid">
-            
-            <div class="card math-card">
-                <div class="card-header">
-                    <span class="badge math-badge">PEA</span>
-                    <h3 class="card-title">Syllabus for Mathematics</h3>
-                </div>
-                
-                <div class="topic-group">
-                    <h4>Algebra</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="binomial-theorem.html">Binomial Theorem</a></li>
-                        <li><a href="ap-and-gp.html">Arithmetic Progression (AP) & Geometric Progression (GP)</a></li>
-                        <li><a href="series.html">Series</a></li>
-                        <li><a href="permutations-and-combinations.html">Permutations and combinations</a></li>
-                        <li><a href="theory-of-polynomial-equations.html">Theory of polynomial equations</a></li>
-                    </ul>
-                </div>
-
-                <div class="topic-group">
-                    <h4>Linear Algebra</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="vector-spaces.html">Vector spaces & Linear transformations</a></li>
-                        <li><a href="matrix-representations.html">Matrix representations and elementary operations</a></li>
-                        <li><a href="systems-of-linear-equations.html">Systems of linear equations</a></li>
-                        <li><a href="eigenvalues.html">Eigenvalues</a></li>
-                    </ul>
-                </div>
-
-                <div class="topic-group">
-                    <h4>Calculus</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="functions.html">Functions & Inverses of functions</a></li>
-                        <li><a href="limits-and-continuity.html">Limits & Continuity</a></li>
-                        <li><a href="differentiation.html">Differentiation of functions of one or more variables</a></li>
-                        <li><a href="unconstrained-optimization.html">Unconstrained Optimization</a></li>
-                        <li><a href="integrals.html">Definite and Indefinite Integrals</a></li>
-                        <li><a href="integration-techniques.html">Integration by parts and integration by substitution</a></li>
-                        <li><a href="monotonicity-and-convexity.html">Monotonicity, convexity and quasi-convexity of functions</a></li>
-                        <li><a href="constrained-optimization.html">Constrained optimization of functions of not more than two variables</a></li>
-                        <li><a href="implicit-function-theorem.html">Implicit function theorem</a></li>
-                        <li><a href="homogeneous-and-homothetic-functions.html">Homogeneous and homothetic functions</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card stats-card">
-                <div class="card-header">
-                    <span class="badge stats-badge">PEA</span>
-                    <h3 class="card-title">Syllabus for Statistics</h3>
-                </div>
-                <div class="topic-group">
-                    <h4>Probability & Core Stats</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="elementary-probability-theory.html">Elementary probability theory & Conditional probability</a></li>
-                        <li><a href="bayes-theorem.html">Bayes’ Theorem</a></li>
-                        <li><a href="central-tendency-and-dispersion.html">Measures of central tendency & Dispersion</a></li>
-                        <li><a href="correlation-and-regression.html">Correlation and regression</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Probability Distributions</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="probability-distributions.html">Discrete and continuous probability distributions</a></li>
-                        <li><a href="binomial-and-geometric-distributions.html">Standard distributions: Binomial & Geometric</a></li>
-                        <li><a href="normal-poisson-and-chisquare-distributions.html">Standard distributions: Normal, Poisson & Chi-square</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Inference</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="sampling-and-estimation.html">Sampling & Estimation</a></li>
-                        <li><a href="hypothesis-testing.html">Hypothesis testing</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card micro-card">
-                <div class="card-header">
-                    <span class="badge micro-badge">PEB</span>
-                    <h3 class="card-title">Syllabus for Microeconomics</h3>
-                </div>
-                <div class="topic-group">
-                    <h4>Consumer & Producer Theory</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="theory-of-choice.html">Theory of choice</a></li>
-                        <li><a href="consumer-behaviour-and-production.html">Consumer behaviour and production</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Markets & Strategic Interaction</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="competitive-markets.html">Competitive markets & Market structure under perfect competition</a></li>
-                        <li><a href="monopoly-and-price-discrimination.html">Monopoly & Price discrimination</a></li>
-                        <li><a href="duopoly-models.html">Duopoly with Cournot and Bertrand competition</a></li>
-                        <li><a href="elementary-strategic-interaction.html">Elementary strategic interaction</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Welfare & Equilibria</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="public-goods-and-externalities.html">Public goods & Externalities</a></li>
-                        <li><a href="general-equilibrium.html">General equilibrium</a></li>
-                        <li><a href="welfare-economics.html">Welfare economics</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card macro-card">
-                <div class="card-header">
-                    <span class="badge macro-badge">PEB</span>
-                    <h3 class="card-title">Syllabus for Macroeconomics</h3>
-                </div>
-                <div class="topic-group">
-                    <h4>Core Income & Market Models</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="national-income-accounting.html">National income accounting</a></li>
-                        <li><a href="simple-keynesian-model.html">Simple Keynesian Model of income determination and the multiplier</a></li>
-                        <li><a href="islm-model.html">IS-LM Model</a></li>
-                        <li><a href="aggregate-demand-and-supply.html">Models of aggregate demand and aggregate supply</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Monetary & Open Economy</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="money-banking-and-inflation.html">Money, banking and inflation</a></li>
-                        <li><a href="phillips-curve.html">Phillips curve</a></li>
-                        <li><a href="open-economy-macroeconomics.html">Elementary open economy macroeconomics</a></li>
-                    </ul>
-                </div>
-                <div class="topic-group">
-                    <h4>Growth Models</h4>
-                    <ul class="syllabus-list">
-                        <li><a href="harrod-domar-model.html">The Harrod-Domar Model</a></li>
-                        <li><a href="solow-model.html">The Solow Model</a></li>
-                    </ul>
-                </div>
-            </div>
-
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nurturing Minds, <br><span class="highlight">Inspiring Growth</span></h1>
+            <p>Welcome to Play & Learn Child Development Center, where we cultivate a safe, engaging, and joyful environment for early childhood learning and development.</p>
+            <a href="#contact" class="btn-large">Enroll Your Child</a>
         </div>
-    </div>
+        <div class="hero-image">
+            <div class="illustration-placeholder">
+                <div class="circle shape-1"></div>
+                <div class="circle shape-2"></div>
+                <div class="circle shape-3"></div>
+            </div>
+        </div>
+    </section>
 
-    <footer>
-        <p>Indian Statistical Institute (ISI) — Master of Science in Quantitative Economics (MSQE) 2026 Portal</p>
+    <section id="hours" class="info-section">
+        <div class="container">
+            <h2>Our Operational Hours</h2>
+            <p class="subtitle">Providing flexible care schedules to support busy families throughout the week.</p>
+            
+            <div class="hours-grid">
+                <div class="hour-card active">
+                    <h3>Weekdays</h3>
+                    <p class="days">Monday — Friday</p>
+                    <p class="time">9:00 AM - 9:00 PM</p>
+                </div>
+                <div class="hour-card active">
+                    <h3>Saturdays</h3>
+                    <p class="days">Saturday</p>
+                    <p class="time">9:00 AM - 9:00 PM</p>
+                </div>
+                <div class="hour-card closed">
+                    <h3>Sundays</h3>
+                    <p class="days">Sunday</p>
+                    <p class="time">Closed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>Get In Touch</h3>
+                <p class="address">
+                    <strong>Address:</strong><br>
+                    Plot No.5 Ragavendra main Road, Saraswathi Nagar Main Rd, Varasakthi Nagar, Kolathur, Chennai, Tamil Nadu 600099
+                </p>
+                <p class="phone">
+                    <strong>Phone:</strong> <a href="tel:+919444243764">+91 94442 43764</a>
+                </p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Play & Learn Child Development Center. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
 </body>
