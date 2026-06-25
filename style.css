@@ -1,0 +1,313 @@
+/* Base Reset & Variables */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffe66d;
+    --dark-text: #2f3e46;
+    --light-bg: #f7fff7;
+    --white: #ffffff;
+    --gray-light: #f1f3f5;
+    --font-heading: 'Fredoka', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--dark-text);
+    background-color: var(--light-bg);
+    line-height: 1.6;
+}
+
+/* Navbar styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.sub-text {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--dark-text);
+    margin-left: 2rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links .btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.nav-links .btn-primary:hover {
+    background-color: #3dbcb4;
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5rem 5%;
+    min-height: 80vh;
+    gap: 2rem;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--dark-text);
+}
+
+.hero-content .highlight {
+    color: var(--primary-color);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #5c677d;
+}
+
+.btn-large {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    border-radius: 50px;
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.illustration-placeholder {
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.shape-1 {
+    width: 250px;
+    height: 250px;
+    background-color: var(--secondary-color);
+    top: 20px;
+    left: 20px;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    background-color: var(--accent-color);
+    bottom: 40px;
+    right: 20px;
+}
+
+.shape-3 {
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-color);
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+
+/* Operational Hours Section */
+.info-section {
+    padding: 5rem 5%;
+    background-color: var(--white);
+    text-align: center;
+}
+
+.info-section h2 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--dark-text);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #7f8c8d;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.hours-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hour-card {
+    background: var(--light-bg);
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    width: 280px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.hour-card:hover {
+    transform: translateY(-5px);
+}
+
+.hour-card.active {
+    border-color: var(--secondary-color);
+}
+
+.hour-card.closed {
+    border-color: #e0e0e0;
+    opacity: 0.7;
+}
+
+.hour-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.hour-card .days {
+    font-weight: 500;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+}
+
+.hour-card .time {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark-text);
+}
+
+/* Footer Section */
+.footer {
+    background-color: #2f3e46;
+    color: var(--white);
+    padding: 4rem 5% 2rem 5%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-info {
+    margin-bottom: 3rem;
+}
+
+.footer-info h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+}
+
+.footer-info p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    max-width: 500px;
+}
+
+.footer-info a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #adb5bd;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 2rem;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .nav-links a {
+        margin: 0 0.75rem;
+    }
+    .illustration-placeholder {
+        width: 300px;
+        height: 300px;
+    }
+}
