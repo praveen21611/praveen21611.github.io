@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect | Hsquare Design</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">H² DESIGN</div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section-container" style="margin-top: 80px;">
+        <h2 class="section-title">Initialize Connection</h2>
+        
+        <div class="contact-wrapper">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Transmission Received!');">
+                
+                <div class="form-group">
+                    <label for="client-name">Operator / Company Name</label>
+                    <input type="text" id="client-name" required placeholder="e.g., Nexus Corp">
+                </div>
+
+                <div class="form-group">
+                    <label for="client-email">Secure Communication Line</label>
+                    <input type="email" id="client-email" required placeholder="name@domain.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="project-scope">Project Parameters / Vision</label>
+                    <textarea id="project-scope" rows="5" required placeholder="Describe the physical parameters or design ethos..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="border: none; width: 100%;">Transmit Parameters</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2026 Hsquare Design. Systems fully operational.
+    </footer>
+
+</body>
+</html>
