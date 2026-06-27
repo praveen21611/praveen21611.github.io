@@ -1,13 +1,13 @@
-/* --- Global Reset & Futuristic Variables --- */
+/* --- Global Reset & Variables --- */
 :root {
-    --bg-dark: #030407;
+    --bg-dark: #020305;
     --bg-card: rgba(255, 255, 255, 0.02);
     --primary-glow: #00f2fe;
     --secondary-glow: #4facfe;
     --accent-neon: #7f00ff;
     --text-main: #ffffff;
     --text-muted: #8a92a6;
-    --neon-border: rgba(0, 242, 254, 0.15);
+    --neon-border: rgba(0, 242, 254, 0.12);
 }
 
 * {
@@ -22,84 +22,303 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
 }
 
-/* --- ULTRADYNAMIC BACKGROUND STREAM --- */
-/* The animated plasma fluid gradient */
-.dynamic-bg-stream {
+/* --- THE LIQUID PLASMA BACKGROUND ENGINE --- */
+.bg-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     z-index: -2;
-    background: radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(127, 0, 255, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.03) 0%, transparent 50%),
-                #040508;
-    background-size: 200% 200%;
-    animation: liquidPlasma 25s ease infinite;
+    overflow: hidden;
+    background: #020204;
 }
 
-@keyframes liquidPlasma {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* Morphing Glowing Blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    animation: morphingEngine 20s infinite alternate;
 }
 
-/* The Cyber grid layer that shifts perspective */
-.cyber-matrix-grid {
+.blob-cyan {
+    top: -10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: var(--primary-glow);
+    animation-duration: 25s;
+}
+
+.blob-purple {
+    bottom: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: var(--accent-neon);
+    animation-duration: 30s;
+    animation-delay: -5s;
+}
+
+.blob-blue {
+    top: 40%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: var(--secondary-glow);
+    animation-duration: 18s;
+    animation-delay: -10s;
+}
+
+/* The fluid deformation and path math using CSS keyframes */
+@keyframes morphingEngine {
+    0% {
+        transform: translate(0px, 0px) scale(1) rotate(0deg);
+        border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+    }
+    33% {
+        transform: translate(100px, 80px) scale(1.2) rotate(120deg);
+        border-radius: 70% 30% 50% 50% / 30% 40% 70% 60%;
+    }
+    66% {
+        transform: translate(-50px, 120px) scale(0.8) rotate(240deg);
+        border-radius: 40% 60% 70% 30% / 40% 50% 30% 70%;
+    }
+    100% {
+        transform: translate(0px, 0px) scale(1) rotate(360deg);
+        border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%;
+    }
+}
+
+/* Delicate digital grid resting gently over the liquid plasma */
+.matrix-grid-overlay {
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    inset: 0;
     z-index: -1;
     background-image: 
-        linear-gradient(rgba(0, 242, 254, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 242, 254, 0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    transform: perspective(500px) rotateX(15deg);
-    animation: matrixDrift 40s linear infinite;
+        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.8;
 }
 
-@keyframes matrixDrift {
-    0% { transform: perspective(500px) rotateX(15deg) translateY(0); }
-    100% { transform: perspective(500px) rotateX(15deg) translateY(60px); }
-}
-
-/* Digital particles layer pulsing inside the background */
-.particle-layer {
+/* --- DYNAMIC NAVIGATION --- */
+header {
     position: fixed;
     top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(2, 3, 5, 0.4);
+    backdrop-filter: blur(30px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    background: linear-gradient(45deg, var(--primary-glow), var(--accent-neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 35px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
     left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-glow);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+nav a:hover::after, nav a.active::after { width: 100%; }
+nav a:hover, nav a.active { color: var(--text-main); text-shadow: 0 0 15px rgba(0, 242, 254, 0.6); }
+
+/* --- HERO SHOWCASE --- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 20px 60px 20px;
+}
+
+.hero-tag {
+    background: rgba(0, 242, 254, 0.05);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary-glow);
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #fff 40%, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero h1 span {
+    background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    max-width: 650px;
+    margin-bottom: 45px;
+    line-height: 1.6;
+}
+
+/* --- GLOWING ACTION BUTTONS --- */
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s;
+}
+
+.btn-primary {
+    background: #000;
+    color: #fff;
+    border: 1px solid var(--primary-glow);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
     z-index: -1;
-    pointer-events: none;
-    opacity: 0.6;
 }
 
-.particle {
-    position: absolute;
-    background: linear-gradient(135deg, var(--primary-glow), var(--accent-neon));
-    border-radius: 50%;
-    filter: blur(1px);
-    box-shadow: 0 0 10px var(--primary-glow);
-    animation: particleFloat infinite linear;
+.btn-primary:hover::before { left: 0; }
+.btn-primary:hover { color: #000; transform: translateY(-2px); box-shadow: 0 0 35px rgba(0, 242, 254, 0.5); }
+
+/* --- HOVER-READY CARDS MATRIX --- */
+.section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px 120px 20px;
 }
 
-/* Individual random sizing and speed configurations for the dynamic background dots */
-.p1 { width: 4px; height: 4px; top: 15%; left: 20%; animation-duration: 14s; opacity: 0.3; }
-.p2 { width: 6px; height: 6px; top: 45%; left: 75%; animation-duration: 18s; opacity: 0.5; }
-.p3 { width: 3px; height: 3px; top: 75%; left: 35%; animation-duration: 12s; opacity: 0.4; }
-.p4 { width: 5px; height: 5px; top: 30%; left: 85%; animation-duration: 22s; opacity: 0.2; }
-.p5 { width: 7px; height: 7px; top: 80%; left: 10%; animation-duration: 16s; opacity: 0.6; }
+.section-title { font-size: 2.8rem; text-align: center; margin-bottom: 60px; font-weight: 800; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
 
-@keyframes particleFloat {
-    0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
-    50% { opacity: 0.8; }
-    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+.card {
+    position: relative;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--neon-border);
+    border-radius: 24px;
+    padding: 45px 35px;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Keep the remaining card, nav, header, button styles exactly as they were in the previous version! */
+.card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-glow);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(0, 242, 254, 0.15);
+}
+
+.card-icon { font-size: 2.5rem; margin-bottom: 25px; display: inline-block; }
+.card h3 { font-size: 1.5rem; margin-bottom: 15px; transition: color 0.3s; }
+.card:hover h3 { color: var(--primary-glow); }
+.card p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+/* --- TERMINAL STYLED CONNECTION INTERFACE --- */
+.contact-wrapper {
+    max-width: 650px;
+    margin: 0 auto;
+    background: rgba(2, 3, 5, 0.5);
+    backdrop-filter: blur(30px);
+    border: 1px solid var(--neon-border);
+    padding: 50px;
+    border-radius: 32px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.form-group { margin-bottom: 30px; }
+.form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: var(--primary-glow); font-weight: 700; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 18px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 3.2rem; }
+    nav a { margin-left: 15px; font-size: 0.85rem; }
+    .contact-wrapper { padding: 30px; }
+}
