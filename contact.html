@@ -3,49 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect | Hsquare Design</title>
+    <title>Contact Portal | Hsquare Design</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Navigation Header -->
     <header>
         <div class="nav-container">
             <div class="logo">H² DESIGN</div>
             <nav>
-                <a href="index.html">Home</a>
-                <a href="contact.html" class="active">Contact</a>
+                <a href="index.html">Home Services</a>
+                <a href="contact.html" class="active">Deploy Project</a>
             </nav>
         </div>
     </header>
 
-    <section class="section-container" style="margin-top: 80px;">
-        <h2 class="section-title">Initialize Connection</h2>
+    <!-- Contact Interface Section -->
+    <section class="section-container" style="margin-top: 100px;">
+        <h2 class="section-title">Initialize Engagement</h2>
         
         <div class="contact-wrapper">
-            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Transmission Received!');">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Project Data Transmitted Securely!');">
                 
                 <div class="form-group">
-                    <label for="client-name">Operator / Company Name</label>
-                    <input type="text" id="client-name" required placeholder="e.g., Nexus Corp">
+                    <label for="client-name">Project Leader / Venture Name</label>
+                    <input type="text" id="client-name" required placeholder="John Doe / Enterprise Elite">
                 </div>
 
                 <div class="form-group">
-                    <label for="client-email">Secure Communication Line</label>
-                    <input type="email" id="client-email" required placeholder="name@domain.com">
+                    <label for="client-email">Communication Stream (Email)</label>
+                    <input type="email" id="client-email" required placeholder="contact@domain.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="project-scope">Project Parameters / Vision</label>
-                    <textarea id="project-scope" rows="5" required placeholder="Describe the physical parameters or design ethos..."></textarea>
+                    <label for="project-scope">Design Mandate & Parameters</label>
+                    <textarea id="project-scope" rows="5" required placeholder="Outline your spatial dimensions, location, or conceptual aesthetic requirements..."></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="border: none; width: 100%;">Transmit Parameters</button>
+                <!-- Custom glowing submit engine -->
+                <button type="submit" class="btn btn-primary" style="width: 100%; z-index: 1;">Deploy Transmission</button>
             </form>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 Hsquare Design. Systems fully operational.
+        <div style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.85rem;">
+            &copy; 2026 Hsquare Design. All digital assets & physical architectures secured.
+        </div>
     </footer>
 
 </body>
